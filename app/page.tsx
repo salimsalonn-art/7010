@@ -65,9 +65,9 @@ export default function Home() {
       
       {/* NAVIGATION HEADER */}
       <nav className="border-b border-slate-800/80 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
           <a href="#home" className="flex items-center space-x-3">
-            <div className="relative h-12 w-40 flex items-center">
+            <div className="relative h-10 sm:h-12 w-36 sm:w-40 flex items-center">
               <img 
                 src="/logo.png" 
                 alt="7010 Advisory Logo" 
@@ -87,7 +87,7 @@ export default function Home() {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-slate-300 focus:outline-none"
+            className="md:hidden text-slate-300 focus:outline-none p-2"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
@@ -110,32 +110,32 @@ export default function Home() {
         )}
       </nav>
 
-      {/* HERO SECTION WITH BACKGROUND IMAGE */}
-      <section id="home" className="relative min-h-[85vh] flex flex-col justify-center py-20 px-6 overflow-hidden border-b border-slate-800/80">
+      {/* HERO SECTION WITH MOBILE-OPTIMIZED BACKGROUND */}
+      <section id="home" className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-12 sm:py-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800/80">
         
         {/* Background Image & Gradient Overlays */}
         <div className="absolute inset-0 z-0">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-center sm:bg-center bg-no-repeat"
             style={{ backgroundImage: `url('/background.png')` }}
           ></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060911] via-[#060911]/90 to-[#060911]/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060911] via-transparent to-[#060911]/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060911] via-[#060911]/95 sm:via-[#060911]/90 to-[#060911]/80 sm:to-[#060911]/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060911] via-transparent to-[#060911]/70"></div>
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-12">
-          <div className="inline-block px-3 py-1 bg-black/40 border border-[#D4AF37]/40 text-[#D4AF37] text-[11px] font-mono uppercase tracking-[0.2em] mb-6 rounded-sm">
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-12">
+          <div className="inline-block px-2.5 py-1 bg-black/50 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 rounded-sm">
             Washington-Based. Globally Connected.
           </div>
           
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal leading-[1.1] text-white mb-8 tracking-tight max-w-4xl">
+          <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl font-normal leading-[1.15] sm:leading-[1.1] text-white mb-6 sm:mb-8 tracking-tight max-w-4xl">
             Navigating Complexity. <br />
             Shaping Conversations. <br />
             <span className="text-[#D4AF37] italic">Advancing Interests.</span>
           </h1>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-10 max-w-2xl font-light">
+          <p className="text-slate-300 text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-2xl font-light">
             7010 Advisory is a Washington, DC-based boutique advisory firm specializing in strategic communications, geopolitical risk, and reputation management.
           </p>
 
@@ -152,16 +152,15 @@ export default function Home() {
       </section>
 
       {/* ABOUT / GLOBAL PERSPECTIVE SECTION WITH second.png */}
-      <section id="about" className="py-28 max-w-7xl mx-auto px-6 border-b border-slate-800/80">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section id="about" className="py-16 sm:py-28 max-w-7xl mx-auto px-5 sm:px-6 border-b border-slate-800/80">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
           
-          {/* Left Side: Image container for second.png */}
-          <div className="relative rounded-sm overflow-hidden border border-slate-800 bg-[#0A0F1D] shadow-2xl group min-h-[380px] sm:min-h-[440px] flex items-center justify-center">
+          {/* Mobile-Optimized Image Container */}
+          <div className="relative rounded-sm overflow-hidden border border-slate-800 bg-[#0A0F1D] shadow-2xl group min-h-[260px] sm:min-h-[440px] w-full flex items-center justify-center">
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
               style={{ backgroundImage: `url('/second.png')` }}
             ></div>
-            {/* Gradient overlays for luxury dark integration */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#060911] via-[#060911]/30 to-transparent"></div>
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
           </div>
@@ -175,19 +174,19 @@ export default function Home() {
               Local Insight. <br />
               <span className="italic text-slate-400">Global Perspective.</span>
             </h2>
-            <p className="text-slate-300 text-base leading-relaxed font-light mb-8">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light mb-8">
               With deep expertise in Washington and the Middle East and North Africa, and a broader international outlook, we provide tailored guidance to help clients navigate complex political and media environments, manage reputational challenges, and advance their strategic objectives.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-              <div className="p-6 border border-slate-800 bg-[#0A0F1D] rounded-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
+              <div className="p-5 sm:p-6 border border-slate-800 bg-[#0A0F1D] rounded-sm">
                 <h3 className="font-serif text-lg text-white mb-2">United States Practice</h3>
                 <p className="text-slate-400 text-xs leading-relaxed font-light">
                   Navigating federal regulatory dynamics, policy impact assessment, and tier-1 US media positioning for institutional entities.
                 </p>
               </div>
 
-              <div className="p-6 border border-slate-800 bg-[#0A0F1D] rounded-sm">
+              <div className="p-5 sm:p-6 border border-slate-800 bg-[#0A0F1D] rounded-sm">
                 <h3 className="font-serif text-lg text-white mb-2">Middle East Practice</h3>
                 <p className="text-slate-400 text-xs leading-relaxed font-light">
                   Strategic counsel aligned with regional economic transformation, stakeholder engagement, and complex public affairs.
@@ -208,34 +207,34 @@ export default function Home() {
       </section>
 
       {/* SERVICES SECTION */}
-      <section id="services" className="py-28 max-w-7xl mx-auto px-6 border-b border-slate-800/80">
-        <div className="max-w-3xl mb-16">
+      <section id="services" className="py-16 sm:py-28 max-w-7xl mx-auto px-5 sm:px-6 border-b border-slate-800/80">
+        <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] block mb-2 font-semibold">
             Capabilities
           </span>
-          <h2 className="font-serif text-3xl sm:text-5xl text-white mb-6 tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-5xl text-white mb-4 sm:mb-6 tracking-tight">
             Our Core Services
           </h2>
-          <p className="text-slate-400 text-base leading-relaxed font-light">
+          <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
             Rigorous analysis and discrete execution tailored for high-stakes environments across North America and the Middle East.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {servicesList.map((service, index) => (
             <div 
               key={index} 
-              className="relative p-8 sm:p-10 bg-[#0A0F1D] border border-slate-800 hover:border-[#D4AF37]/60 transition-all duration-300 flex flex-col justify-between group shadow-xl overflow-hidden rounded-sm min-h-[380px]"
+              className="relative p-6 sm:p-10 bg-[#0A0F1D] border border-slate-800 hover:border-[#D4AF37]/60 transition-all duration-300 flex flex-col justify-between group shadow-xl overflow-hidden rounded-sm min-h-[340px] sm:min-h-[380px]"
             >
               <div 
-                className="absolute inset-0 bg-cover bg-center opacity-100 group-hover:opacity-110 transition-all duration-500 pointer-events-none"
+                className="absolute inset-0 bg-cover bg-center opacity-15 group-hover:opacity-30 transition-all duration-500 pointer-events-none"
                 style={{ backgroundImage: `url(${service.image})` }}
               ></div>
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1D] via-[#0A0F1D]/90 to-[#0A0F1D]/70 pointer-events-none"></div>
 
               <div className="relative z-10">
-                <h3 className="font-serif text-2xl text-white mb-3 font-normal tracking-tight">
+                <h3 className="font-serif text-xl sm:text-2xl text-white mb-3 font-normal tracking-tight">
                   {service.title}
                 </h3>
                 <div className="h-0.5 w-10 bg-[#D4AF37] mb-5"></div>
@@ -260,20 +259,20 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-28 max-w-3xl mx-auto px-6">
-        <div className="text-center mb-12">
+      <section id="contact" className="py-16 sm:py-28 max-w-3xl mx-auto px-5 sm:px-6">
+        <div className="text-center mb-10 sm:mb-12">
           <span className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] block mb-2 font-semibold">
             Inquiry
           </span>
           <h2 className="font-serif text-3xl sm:text-5xl text-white mb-4 tracking-tight">
             Get in Touch
           </h2>
-          <p className="text-slate-400 text-sm max-w-lg mx-auto font-light">
+          <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto font-light">
             Select the capabilities you require below to start a confidential discussion with our leadership.
           </p>
         </div>
 
-        <div className="border border-slate-800 p-8 sm:p-10 bg-[#0A0F1D] shadow-2xl rounded-sm">
+        <div className="border border-slate-800 p-6 sm:p-10 bg-[#0A0F1D] shadow-2xl rounded-sm">
           {formSubmitted ? (
             <div className="text-center py-8">
               <div className="w-12 h-12 bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
