@@ -119,7 +119,7 @@ export default function Home() {
           {/* Background Image & Gradient Overlays */}
           <div className="absolute inset-0 z-0">
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 mix-blend-overlay"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 mix-blend-overlay"
               style={{ backgroundImage: `url('/background.png')` }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-r from-[#202326] via-[#202326]/95 sm:via-[#202326]/90 to-[#202326]/80 sm:to-[#202326]/60"></div>
