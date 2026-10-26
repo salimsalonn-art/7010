@@ -26,9 +26,13 @@ export default function ContactPage() {
       <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#253449]/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
           <a href="/" className="flex items-center space-x-3">
-            <div className="relative h-10 sm:h-12 w-36 sm:w-40 flex items-center">
-              <img src="/logo.png" alt="7010 Advisory Logo" className="h-full w-auto object-contain rounded-sm" />
-            </div>
+            <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center">
+  <img
+    src="/logo.png"
+    alt="7010 Advisory Logo"
+    className="h-full w-full object-contain"
+  />
+</div>
           </a>
           <div className="hidden md:flex items-center space-x-12 text-xs font-semibold uppercase tracking-widest text-[#F5F2E9]/80">
             <a href="/" className="hover:text-[#C7AA70] transition-colors">Home</a>
