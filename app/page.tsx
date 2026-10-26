@@ -61,13 +61,13 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen font-sans antialiased selection:bg-[#C7AA70] selection:text-black">
+    <main className="min-h-screen font-sans antialiased selection:bg-[#C7AA70] selection:text-black bg-[#0B132B] text-white">
       
-      {/* SECTION 1: CHARCOAL - Navigation & Hero */}
-      <div className="bg-[#202326] text-white">
+      {/* SECTION 1: DARK NAVY - Navigation & Hero */}
+      <div className="bg-[#0B132B] text-white">
         
         {/* NAVIGATION HEADER */}
-        <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#202326]/95 backdrop-blur-md">
+        <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#0B132B]/95 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
             <a href="#home" className="flex items-center space-x-3">
               <div className="relative h-10 sm:h-12 w-36 sm:w-40 flex items-center">
@@ -104,7 +104,7 @@ export default function Home() {
 
           {/* Mobile Dropdown */}
           {mobileMenuOpen && (
-            <div className="md:hidden bg-[#181A1C] border-b border-slate-800 px-6 py-6 space-y-4 text-xs font-semibold uppercase tracking-widest">
+            <div className="md:hidden bg-[#1C2541] border-b border-slate-800 px-6 py-6 space-y-4 text-xs font-semibold uppercase tracking-widest">
               <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-[#F5F2E9] hover:text-[#C7AA70]">Home</a>
               <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block text-[#F5F2E9] hover:text-[#C7AA70]">About</a>
               <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block text-[#F5F2E9] hover:text-[#C7AA70]">Services</a>
@@ -119,16 +119,16 @@ export default function Home() {
           {/* Background Image & Gradient Overlays */}
           <div className="absolute inset-0 z-0">
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 mix-blend-overlay"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-overlay"
               style={{ backgroundImage: `url('/background.png')` }}
             ></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#202326] via-[#202326]/95 sm:via-[#202326]/90 to-[#202326]/80 sm:to-[#202326]/60"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#202326] via-transparent to-[#202326]/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B132B] via-[#0B132B]/95 sm:via-[#0B132B]/90 to-[#0B132B]/80 sm:to-[#0B132B]/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-transparent to-[#0B132B]/70"></div>
           </div>
 
           {/* Hero Content */}
           <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-12">
-            <div className="inline-block px-3 py-1 bg-[#181A1C]/80 border border-[#C7AA70]/40 text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 rounded-sm shadow-sm">
+            <div className="inline-block px-3 py-1 bg-[#1C2541]/80 border border-[#C7AA70]/40 text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 rounded-sm shadow-sm">
               Washington-Based. Globally Connected.
             </div>
             
@@ -155,12 +155,12 @@ export default function Home() {
         </section>
       </div>
 
-      {/* SECTION 2: WHITE CONTENT - About & Global Perspective */}
-      <section id="about" className="py-16 sm:py-28 bg-[#F5F2E9] text-[#202326] border-b border-slate-200">
+      {/* SECTION 2: DARK NAVY - About & Global Perspective */}
+      <section id="about" className="py-16 sm:py-28 bg-[#0B132B] text-white border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
             
-            {/* Image Container for second.png */}
+            {/* Image Container for second.png - No Frame */}
 <div className="relative flex items-center justify-center">
   <img
     src="/second.png"
@@ -174,25 +174,25 @@ export default function Home() {
               <span className="text-xs font-mono uppercase tracking-widest text-[#C7AA70] block mb-3 font-semibold">
                 Global Perspective
               </span>
-              <h2 className="font-serif text-3xl sm:text-5xl text-[#202326] mb-6 tracking-tight leading-tight">
+              <h2 className="font-serif text-3xl sm:text-5xl text-[#F5F2E9] mb-6 tracking-tight leading-tight">
                 Local Insight. <br />
-                <span className="italic text-[#555B61]">Global Perspective.</span>
+                <span className="italic text-slate-400">Global Perspective.</span>
               </h2>
-              <p className="text-[#555B61] text-sm sm:text-base leading-relaxed font-light mb-8">
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light mb-8">
                 With deep expertise in Washington and the Middle East and North Africa, and a broader international outlook, we provide tailored guidance to help clients navigate complex political and media environments, manage reputational challenges, and advance their strategic objectives.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
-                <div className="p-5 sm:p-6 border border-slate-200 bg-white rounded-sm shadow-sm">
-                  <h3 className="font-serif text-lg text-[#202326] mb-2">United States Practice</h3>
-                  <p className="text-[#555B61] text-xs leading-relaxed font-light">
+                <div className="p-5 sm:p-6 border border-slate-800 bg-[#1C2541] rounded-sm shadow-sm">
+                  <h3 className="font-serif text-lg text-white mb-2">United States Practice</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed font-light">
                     Navigating federal regulatory dynamics, policy impact assessment, and tier-1 US media positioning for institutional entities.
                   </p>
                 </div>
 
-                <div className="p-5 sm:p-6 border border-slate-200 bg-white rounded-sm shadow-sm">
-                  <h3 className="font-serif text-lg text-[#202326] mb-2">Middle East Practice</h3>
-                  <p className="text-[#555B61] text-xs leading-relaxed font-light">
+                <div className="p-5 sm:p-6 border border-slate-800 bg-[#1C2541] rounded-sm shadow-sm">
+                  <h3 className="font-serif text-lg text-white mb-2">Middle East Practice</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed font-light">
                     Strategic counsel aligned with regional economic transformation, stakeholder engagement, and complex public affairs.
                   </p>
                 </div>
@@ -200,7 +200,7 @@ export default function Home() {
 
               <a 
                 href="#contact" 
-                className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-[#C7AA70] hover:text-[#202326] transition-colors font-semibold"
+                className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-[#C7AA70] hover:text-white transition-colors font-semibold"
               >
                 <span>Contact Leadership</span>
                 <span>→</span>
@@ -211,17 +211,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 3: WHITE CONTENT - Core Services */}
-      <section id="services" className="py-16 sm:py-28 bg-[#F5F2E9] text-[#202326] border-b border-slate-200">
+      {/* SECTION 3: DARK NAVY - Core Services */}
+      <section id="services" className="py-16 sm:py-28 bg-[#0B132B] text-white border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="max-w-3xl mb-12 sm:mb-16">
             <span className="text-xs font-mono uppercase tracking-widest text-[#C7AA70] block mb-2 font-semibold">
               Capabilities
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#202326] mb-4 sm:mb-6 tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-5xl text-[#F5F2E9] mb-4 sm:mb-6 tracking-tight">
               Our Core Services
             </h2>
-            <p className="text-[#555B61] text-sm sm:text-base leading-relaxed font-light">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
               Rigorous analysis and discrete execution tailored for high-stakes environments across North America and the Middle East.
             </p>
           </div>
@@ -230,29 +230,29 @@ export default function Home() {
             {servicesList.map((service, index) => (
               <div 
                 key={index} 
-                className="relative p-6 sm:p-10 bg-white border border-slate-200 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-md overflow-hidden rounded-sm min-h-[340px] sm:min-h-[380px]"
+                className="relative p-6 sm:p-10 bg-[#1C2541] border border-slate-800 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-md overflow-hidden rounded-sm min-h-[340px] sm:min-h-[380px]"
               >
                 <div 
                   className="absolute inset-0 bg-cover bg-center opacity-100 group-hover:opacity-115 transition-all duration-500 pointer-events-none"
                   style={{ backgroundImage: `url(${service.image})` }}
                 ></div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-white/75 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C2541] via-[#1C2541]/90 to-[#1C2541]/75 pointer-events-none"></div>
 
                 <div className="relative z-10">
-                  <h3 className="font-serif text-xl sm:text-2xl text-[#202326] mb-3 font-normal tracking-tight">
+                  <h3 className="font-serif text-xl sm:text-2xl text-white mb-3 font-normal tracking-tight">
                     {service.title}
                   </h3>
                   <div className="h-0.5 w-10 bg-[#C7AA70] mb-5"></div>
-                  <p className="text-[#555B61] text-xs sm:text-sm leading-relaxed mb-6 font-light">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 font-light">
                     {service.description}
                   </p>
                 </div>
 
-                <div className="relative z-10 border-t border-slate-200 pt-5">
+                <div className="relative z-10 border-t border-slate-800 pt-5">
                   <ul className="space-y-2.5">
                     {service.bullets.map((bullet, idx) => (
-                      <li key={idx} className="text-xs text-[#202326] font-medium flex items-center space-x-3">
+                      <li key={idx} className="text-xs text-slate-200 font-medium flex items-center space-x-3">
                         <span className="w-1.5 h-1.5 bg-[#C7AA70] rounded-full shrink-0"></span>
                         <span className="tracking-wide">{bullet}</span>
                       </li>
@@ -265,8 +265,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4: CHARCOAL - Contact Section */}
-      <section id="contact" className="py-16 sm:py-28 bg-[#202326] text-white">
+      {/* SECTION 4: DARK NAVY - Contact Section */}
+      <section id="contact" className="py-16 sm:py-28 bg-[#0B132B] text-white">
         <div className="max-w-3xl mx-auto px-5 sm:px-6">
           <div className="text-center mb-10 sm:mb-12">
             <span className="text-xs font-mono uppercase tracking-widest text-[#C7AA70] block mb-2 font-semibold">
@@ -280,7 +280,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="border border-slate-800 p-6 sm:p-10 bg-[#181A1C] shadow-2xl rounded-sm">
+          <div className="border border-slate-800 p-6 sm:p-10 bg-[#1C2541] shadow-2xl rounded-sm">
             {formSubmitted ? (
               <div className="text-center py-8">
                 <div className="w-12 h-12 bg-[#C7AA70]/20 border border-[#C7AA70] text-[#C7AA70] rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
@@ -314,7 +314,7 @@ export default function Home() {
                         className={`p-3 text-left text-xs font-medium border transition-all flex items-center justify-between rounded-sm ${
                           selectedServices.includes(s.title)
                             ? 'bg-[#C7AA70] border-[#C7AA70] text-black font-semibold'
-                            : 'bg-[#202326] border-slate-800 text-slate-300 hover:border-slate-600'
+                            : 'bg-[#0B132B] border-slate-800 text-slate-300 hover:border-slate-600'
                         }`}
                       >
                         <span>{s.title}</span>
@@ -334,7 +334,7 @@ export default function Home() {
                       type="text"
                       name="Full Name"
                       placeholder="Jane Doe"
-                      className="w-full bg-[#202326] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
+                      className="w-full bg-[#0B132B] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
                     />
                   </div>
                   <div>
@@ -346,7 +346,7 @@ export default function Home() {
                       type="text"
                       name="Organization"
                       placeholder="Company / Sovereign Entity"
-                      className="w-full bg-[#202326] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
+                      className="w-full bg-[#0B132B] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
                     />
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export default function Home() {
                     type="email"
                     name="Email"
                     placeholder="name@organization.com"
-                    className="w-full bg-[#202326] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
+                    className="w-full bg-[#0B132B] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
                   />
                 </div>
 
@@ -377,7 +377,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-10 bg-[#141618] text-xs text-slate-500 border-t border-slate-800">
+      <footer className="py-10 bg-[#060A17] text-xs text-slate-500 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center space-x-2">
             <img 
