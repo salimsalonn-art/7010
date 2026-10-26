@@ -119,7 +119,7 @@ export default function Home() {
           {/* Background Image & Gradient Overlays */}
           <div className="absolute inset-0 z-0">
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-overlay"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 mix-blend-overlay"
               style={{ backgroundImage: `url('/background.png')` }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-r from-[#0B132B] via-[#0B132B]/95 sm:via-[#0B132B]/90 to-[#0B132B]/80 sm:to-[#0B132B]/60"></div>
@@ -160,12 +160,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
             
-            {/* Image Container for second.png - No Frame */}
+            {/* Image Container - Bigger Image */}
 <div className="relative flex items-center justify-center">
   <img
     src="/second.png"
     alt="Global Perspective Globe"
-    className="w-full h-auto max-h-[600px] object-contain"
+    className="w-full h-auto max-h-[800px] lg:scale-125 object-contain"
   />
 </div>
 
