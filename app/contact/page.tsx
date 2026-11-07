@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { db } from '@/lib/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function ContactPage() {
   const [selectedService, setSelectedService] = useState('General Inquiry');
@@ -21,10 +23,20 @@ export default function ContactPage() {
     description: "Select the capabilities you require below to start a confidential discussion with our leadership."
   });
 
-  // Load Saved Content from LocalStorage on mount
+  // Load Saved Content from Firebase Firestore on mount
   useEffect(() => {
-    const saved = localStorage.getItem('contact_content_7010');
-    if (saved) setContent(JSON.parse(saved));
+    const fetchContent = async () => {
+      try {
+        const docRef = doc(db, 'site_content', 'contact_page');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setContent(docSnap.data() as typeof content);
+        }
+      } catch (err) {
+        console.error("Error fetching contact page content:", err);
+      }
+    };
+    fetchContent();
   }, []);
 
   // Handle Login Authentication
@@ -41,10 +53,15 @@ export default function ContactPage() {
     }
   };
 
-  // Save Edits to LocalStorage
-  const handleSave = () => {
-    localStorage.setItem('contact_content_7010', JSON.stringify(content));
-    setIsEditing(false);
+  // Save Edits directly to Firebase Cloud Database
+  const handleSave = async () => {
+    try {
+      const docRef = doc(db, 'site_content', 'contact_page');
+      await setDoc(docRef, content);
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Error saving contact page content:", err);
+    }
   };
 
   const servicesList = [
@@ -141,13 +158,13 @@ export default function ContactPage() {
 
       {/* NAVIGATION HEADER */}
       <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#253449]/95 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
-          <a href="/" className="flex items-center space-x-3">
-            <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
+          <a href="/" className="flex items-center space-x-0 -ml-2 sm:-ml-3">
+            <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center justify-start">
               <img
                 src="/logo.png"
                 alt="7010 Advisory Logo"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain object-left"
               />
             </div>
           </a>
@@ -263,7 +280,7 @@ export default function ContactPage() {
               {/* OPTIONAL SERVICE / GENERAL INQUIRY SELECTION */}
               <div>
                 <label className="block text-xs font-mono uppercase tracking-wider text-[#C7AA70] mb-2 font-semibold">
-                  Inquiry Type (Optional)
+                  Inquiry Type 
                 </label>
                 <select
                   value={selectedService}

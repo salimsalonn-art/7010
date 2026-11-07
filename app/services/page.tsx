@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { db } from '@/lib/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function ServicesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -66,12 +68,22 @@ export default function ServicesPage() {
     }
   ]);
 
-  // Load Saved Content from LocalStorage on mount
+  // Load Saved Content from Firebase Firestore on mount
   useEffect(() => {
-    const savedHeader = localStorage.getItem('services_header_7010');
-    const savedServices = localStorage.getItem('services_list_7010');
-    if (savedHeader) setHeaderContent(JSON.parse(savedHeader));
-    if (savedServices) setServicesList(JSON.parse(savedServices));
+    const fetchContent = async () => {
+      try {
+        const docRef = doc(db, 'site_content', 'services_page');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.headerContent) setHeaderContent(data.headerContent);
+          if (data.servicesList) setServicesList(data.servicesList);
+        }
+      } catch (err) {
+        console.error("Error fetching services page content:", err);
+      }
+    };
+    fetchContent();
   }, []);
 
   // Handle Login Authentication
@@ -88,11 +100,15 @@ export default function ServicesPage() {
     }
   };
 
-  // Save Edits to LocalStorage
-  const handleSave = () => {
-    localStorage.setItem('services_header_7010', JSON.stringify(headerContent));
-    localStorage.setItem('services_list_7010', JSON.stringify(servicesList));
-    setIsEditing(false);
+  // Save Edits directly to Firebase Cloud Database
+  const handleSave = async () => {
+    try {
+      const docRef = doc(db, 'site_content', 'services_page');
+      await setDoc(docRef, { headerContent, servicesList });
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Error saving services page content:", err);
+    }
   };
 
   // Update Individual Service Text
@@ -195,16 +211,16 @@ export default function ServicesPage() {
 
       {/* NAVIGATION HEADER */}
       <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#253449]/95 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
-          <a href="/" className="flex items-center space-x-3">
-            <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center">
-              <img
-                src="/logo.png"
-                alt="7010 Advisory Logo"
-                className="h-full w-full object-contain"
-              />
-            </div>
-          </a>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
+          <a href="/" className="flex items-center space-x-0 -ml-2 sm:-ml-3">
+  <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center justify-start">
+    <img
+      src="/logo.png"
+      alt="7010 Advisory Logo"
+      className="h-full w-full object-contain object-left"
+    />
+  </div>
+</a>
           <div className="hidden md:flex items-center space-x-12 text-xs font-semibold uppercase tracking-widest text-[#F5F2E9]/80">
             <a href="/" className="hover:text-[#C7AA70] transition-colors">Home</a>
             <a href="/about" className="hover:text-[#C7AA70] transition-colors">About</a>
