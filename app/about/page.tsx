@@ -175,8 +175,8 @@ export default function AboutPage() {
       </nav>
 
       {/* ABOUT CONTENT SECTION */}
-      <section className="py-32 sm:py-40 max-w-7xl mx-auto px-5 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <section className="py-24 sm:py-32 max-w-7xl mx-auto px-5 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           <div className="relative flex items-center justify-center">
             <img

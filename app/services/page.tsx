@@ -238,8 +238,8 @@ export default function ServicesPage() {
       </nav>
 
       {/* SERVICES CONTENT SECTION */}
-      <section className="py-32 sm:py-40 max-w-7xl mx-auto px-5 sm:px-6">
-        <div className="max-w-3xl mb-12 sm:mb-16">
+      <section className="py-24 sm:py-32 max-w-7xl mx-auto px-5 sm:px-6">
+        <div className="max-w-3xl mb-10 sm:mb-12">
           {/* Section Tag */}
           {isEditing ? (
             <input 
@@ -284,11 +284,11 @@ export default function ServicesPage() {
         </div>
 
         {/* Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {servicesList.map((service, index) => (
             <div 
               key={index} 
-              className="relative p-6 sm:p-10 bg-[#121F42] border border-slate-800 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-md overflow-hidden rounded-sm min-h-[340px] sm:min-h-[380px]"
+              className="relative p-5 sm:p-6 bg-[#121F42] border border-slate-800 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-md overflow-hidden rounded-sm min-h-[300px]"
             >
               <div 
                 className="absolute inset-0 bg-cover bg-center opacity-100 group-hover:opacity-115 transition-all duration-500 pointer-events-none"

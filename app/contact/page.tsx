@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function ContactPage() {
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedService, setSelectedService] = useState('General Inquiry');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -47,17 +47,12 @@ export default function ContactPage() {
     setIsEditing(false);
   };
 
-  const toggleService = (service: string) => {
-    setSelectedServices(prev =>
-      prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]
-    );
-  };
-
   const servicesList = [
-    { title: "Strategic Communications" },
-    { title: "Geopolitical Risk & Strategic Advisory" },
-    { title: "Media Relations & Executive Positioning" },
-    { title: "Crisis Communications & Reputation Management" }
+    "General Inquiry",
+    "Strategic Communications",
+    "Geopolitical Risk & Strategic Advisory",
+    "Media Relations & Executive Positioning",
+    "Crisis Communications & Reputation Management"
   ];
 
   return (
@@ -189,8 +184,8 @@ export default function ContactPage() {
       </nav>
 
       {/* CONTACT CONTENT SECTION */}
-      <section className="py-32 sm:py-40 max-w-3xl mx-auto px-5 sm:px-6">
-        <div className="text-center mb-10 sm:mb-12">
+      <section className="py-24 sm:py-32 max-w-3xl mx-auto px-5 sm:px-6">
+        <div className="text-center mb-8 sm:mb-10">
           {/* Tag */}
           {isEditing ? (
             <input 
@@ -247,81 +242,75 @@ export default function ContactPage() {
             </div>
           ) : (
             <form 
-              action="https://api.web3forms.com/submit" 
-              method="POST"
-              onSubmit={() => setFormSubmitted(true)} 
-              className="space-y-6"
-            >
-              <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-              <input type="hidden" name="Selected Services" value={selectedServices.join(', ')} />
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                
+                const response = await fetch("https://api.web3forms.com/submit", {
+                  method: "POST",
+                  body: formData
+                });
 
+                if (response.ok) {
+                  setFormSubmitted(true);
+                }
+              }} 
+              className="space-y-5"
+            >
+              <input type="hidden" name="access_key" value="535b5f06-63bd-4115-a97d-b4c2be99c128" />
+              <input type="hidden" name="Selected Service" value={selectedService} />
+
+              {/* OPTIONAL SERVICE / GENERAL INQUIRY SELECTION */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#C7AA70] mb-3 font-semibold">
-                  Select Required Services
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#C7AA70] mb-2 font-semibold">
+                  Inquiry Type (Optional)
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {servicesList.map((s) => (
-                    <button
-                      type="button"
-                      key={s.title}
-                      onClick={() => toggleService(s.title)}
-                      className={`p-3 text-left text-xs font-medium border transition-all flex items-center justify-between rounded-sm ${
-                        selectedServices.includes(s.title)
-                          ? 'bg-[#C7AA70] border-[#C7AA70] text-black font-semibold'
-                          : 'bg-[#0A1128] border-slate-800 text-slate-300 hover:border-slate-600'
-                      }`}
-                    >
-                      <span>{s.title}</span>
-                      <span>{selectedServices.includes(s.title) ? '✓' : '+'}</span>
-                    </button>
+                <select
+                  value={selectedService}
+                  onChange={(e) => setSelectedService(e.target.value)}
+                  className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors rounded-sm"
+                >
+                  {servicesList.map((service, idx) => (
+                    <option key={idx} value={service} className="bg-[#0A1128] text-white">
+                      {service}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
+              {/* NAME & OPTIONAL ORGANIZATION */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
-                    Full Name
+                    Full Name <span className="text-[#C7AA70]">*</span>
                   </label>
-                  <input
-                    required
-                    type="text"
-                    name="Full Name"
-                    placeholder="Jane Doe"
-                    className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
-                  />
+                  <input required type="text" name="Full Name" placeholder="Jane Doe" className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
                 </div>
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
                     Organization
                   </label>
-                  <input
-                    required
-                    type="text"
-                    name="Organization"
-                    placeholder="Company / Sovereign Entity"
-                    className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
-                  />
+                  <input type="text" name="Organization" placeholder="Company / Sovereign Entity" className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
                 </div>
               </div>
 
+              {/* EMAIL */}
               <div>
                 <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
-                  Corporate Email
+                  Corporate Email <span className="text-[#C7AA70]">*</span>
                 </label>
-                <input
-                  required
-                  type="email"
-                  name="Email"
-                  placeholder="name@organization.com"
-                  className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm"
-                />
+                <input required type="email" name="Email" placeholder="name@organization.com" className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
               </div>
 
-              <button
-                type="submit"
-                className="w-full py-4 bg-[#C7AA70] text-black font-semibold text-xs uppercase tracking-widest hover:bg-[#b5985e] transition-colors shadow-lg rounded-sm"
-              >
+              {/* REQUIRED BLANK MESSAGE FIELD */}
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
+                  Message <span className="text-[#C7AA70]">*</span>
+                </label>
+                <textarea required rows={4} name="Message" placeholder="Type your message here..." className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm resize-none" />
+              </div>
+
+              <button type="submit" className="w-full py-4 bg-[#C7AA70] text-black font-semibold text-xs uppercase tracking-widest hover:bg-[#b5985e] transition-colors shadow-lg rounded-sm">
                 Send Inquiry
               </button>
             </form>
