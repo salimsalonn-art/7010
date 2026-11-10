@@ -138,71 +138,89 @@ export default function ServicesPage() {
   };
 
   // Service icons
-  const renderIcon = (iconType: string) => {
-    const commonProps = {
-      className: "w-7 h-7 text-[#C7AA70]",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: 1.5,
-      viewBox: "0 0 24 24",
-      strokeLinecap: "round" as const,
-      strokeLinejoin: "round" as const
-    };
 
-    switch (iconType) {
-      case 'megaphone':
-        return (
-          <svg {...commonProps}>
-            <path d="M3 11v2a2 2 0 002 2h2l3 4v-5.2c4.1-.3 7.2-1.8 10-4.3V5.5C17.2 3 13.1 2 9 2H5a2 2 0 00-2 2v2" />
-            <path d="M19 8a3 3 0 010 6M7 15l1.5 5" />
-          </svg>
-        );
-
-      case 'shield':
-        return (
-          <svg {...commonProps}>
-            <path d="M12 3l8 3v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3z" />
-            <path d="M9 12l2 2 4-4" />
-          </svg>
-        );
-
-      case 'globe':
-        return (
-          <svg {...commonProps}>
-            <circle cx="12" cy="12" r="9" />
-            <path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18" />
-          </svg>
-        );
-
-      case 'award':
-        return (
-          <svg {...commonProps}>
-            <circle cx="12" cy="8" r="5" />
-            <path d="M8.5 12l-1 9 4.5-2.5 4.5 2.5-1-9" />
-            <path d="M12 5.5l.8 1.6 1.7.2-1.2 1.2.3 1.7-1.6-.8-1.6.8.3-1.7-1.2-1.2 1.7-.2L12 5.5z" />
-          </svg>
-        );
-
-      case 'compass':
-        return (
-          <svg {...commonProps}>
-            <circle cx="12" cy="12" r="9" />
-            <path d="M15.8 8.2l-2.4 5.2-5.2 2.4 2.4-5.2 5.2-2.4z" />
-          </svg>
-        );
-
-      case 'microphone':
-        return (
-          <svg {...commonProps}>
-            <rect x="9" y="3" width="6" height="12" rx="3" />
-            <path d="M5 11a7 7 0 0014 0M12 18v3M9 21h6" />
-          </svg>
-        );
-
-      default:
-        return null;
-    }
+// Service icons - matching the reference design
+const renderIcon = (iconType: string) => {
+  const commonProps = {
+    className: "w-12 h-12 text-[#C7AA70]",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.3,
+    viewBox: "0 0 48 48",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const
   };
+
+  switch (iconType) {
+    // 1. Strategic Communications - Megaphone
+    case 'megaphone':
+      return (
+        <svg {...commonProps}>
+          <path d="M5 19h7l27-12v30L12 25H5z" />
+          <path d="M12 25l4 15h7l-5-13" />
+          <path d="M5 19v6" />
+        </svg>
+      );
+
+    // 2. Crisis Communications - Shield
+    case 'shield':
+      return (
+        <svg {...commonProps}>
+          <path d="M24 3L5 10v12c0 12 8 19 19 23 11-4 19-11 19-23V10L24 3z" />
+        </svg>
+      );
+
+    // 3. Geopolitical Advisory - Globe
+    case 'globe':
+      return (
+        <svg {...commonProps}>
+          <circle cx="24" cy="24" r="21" />
+          <path d="M3 24h42" />
+          <path d="M24 3c-8 7-12 14-12 21s4 14 12 21" />
+          <path d="M24 3c8 7 12 14 12 21s-4 14-12 21" />
+          <path d="M7 12h34M7 36h34" />
+        </svg>
+      );
+
+    // 4. Executive Positioning - Three People
+    case 'award':
+      return (
+        <svg {...commonProps}>
+          <circle cx="24" cy="11" r="6" />
+          <circle cx="10" cy="17" r="5" />
+          <circle cx="38" cy="17" r="5" />
+          <path d="M9 40v-5c0-7 5-11 15-11s15 4 15 11v5H9z" />
+          <path d="M3 39v-5c0-5 3-9 8-10" />
+          <path d="M45 39v-5c0-5-3-9-8-10" />
+        </svg>
+      );
+
+    // 5. Market Entry & Business Advisory - Presentation Chart
+    case 'compass':
+      return (
+        <svg {...commonProps}>
+          <path d="M5 5h38v28H5z" />
+          <path d="M24 33v7M16 43h16" />
+          <path d="M11 25l9-9 7 5 11-10" />
+          <path d="M31 11h7v7" />
+          <path d="M12 33l-4 7" />
+        </svg>
+      );
+
+    // 6. Media Engagement & Training - Speech Bubbles
+    case 'microphone':
+      return (
+        <svg {...commonProps}>
+          <path d="M5 20c0-9 8-15 18-15s18 6 18 15-8 15-18 15c-3 0-6-.5-8-2L5 36l3-8c-2-2-3-5-3-8z" />
+          <path d="M28 27c2 7 8 11 15 11 1 0 2 0 3-.3l-2-6c2-2 3-4 3-7 0-7-6-12-14-12" />
+        </svg>
+      );
+
+    default:
+      return null;
+  }
+};
+
 
   return (
     <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden">
@@ -351,7 +369,7 @@ export default function ServicesPage() {
       <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-7xl mx-auto px-5 sm:px-6">
 
         {/* Globe Background Asset */}
-        <div className="absolute top-4 right-[-25px] sm:top-0 sm:right-[-5%] lg:right-[-2%] w-[280px] h-[280px] sm:w-[650px] sm:h-[650px] lg:w-[800px] lg:h-[800px] pointer-events-none z-0 opacity-[0.22] sm:opacity-100 overflow-hidden">
+        <div className="absolute top-4 right-[-25px] sm:top-0 sm:right-[-5%] lg:right-[-2%] w-[280px] h-[280px] sm:w-[650px] sm:h-[650px] lg:w-[800px] lg:h-[800px] pointer-events-none z-0 opacity-[0.82] sm:opacity-100 overflow-hidden">
           <img
             src="/globe.png"
             alt=""
@@ -427,9 +445,9 @@ export default function ServicesPage() {
               <div>
                 {/* Service Icon */}
                 <div className="mb-5 sm:mb-6">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-[#C7AA70]/30 bg-[#0A1128]/60 rounded-sm group-hover:border-[#C7AA70]/70 transition-colors duration-300">
-                    {renderIcon(service.icon)}
-                  </div>
+                 <div className="flex items-center justify-start">
+  {renderIcon(service.icon)}
+</div>
                 </div>
 
                 {/* Editable Card Title */}
