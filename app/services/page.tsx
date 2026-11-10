@@ -380,42 +380,57 @@ const renderIcon = (iconType: string) => {
 
         {/* Header Content */}
         <div className="relative z-10 max-w-3xl mb-12 sm:mb-20">
-          {/* Section Tag */}
-          {isEditing ? (
-            <input
-              type="text"
-              value={headerContent.tag}
-              onChange={(e) => setHeaderContent({ ...headerContent, tag: e.target.value })}
-              className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] p-2 mb-4 w-full max-w-xs rounded-sm block"
-            />
-          ) : (
-            <div className="inline-block px-3 py-1 bg-[#121F42]/80 border border-[#C7AA70]/40 text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] mb-4 rounded-sm shadow-sm">
-              {headerContent.tag}
-            </div>
-          )}
-
-          {/* Section Title */}
-          <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl text-[#F5F2E9] mb-6 tracking-tight leading-[1.1]">
+          {/* TAG + GOLD LINE */}
+          <div className="flex items-center gap-6 mb-8 sm:mb-10">
             {isEditing ? (
-              <div className="space-y-2">
+              <input
+                type="text"
+                value={headerContent.tag}
+                onChange={(e) =>
+                  setHeaderContent({ ...headerContent, tag: e.target.value })
+                }
+                className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
+              />
+            ) : (
+              <span className="text-[#C7AA70] text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] whitespace-nowrap">
+                {headerContent.tag}
+              </span>
+            )}
+
+            <div className="h-[2px] bg-[#C7AA70] w-20 sm:w-40 lg:w-60" />
+          </div>
+
+          {/* SECTION TITLE */}
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl">
+            {isEditing ? (
+              <div className="space-y-3">
                 <input
                   type="text"
                   value={headerContent.titleLine1}
-                  onChange={(e) => setHeaderContent({ ...headerContent, titleLine1: e.target.value })}
-                  className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-4xl rounded-sm"
+                  onChange={(e) =>
+                    setHeaderContent({ ...headerContent, titleLine1: e.target.value })
+                  }
+                  className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-3xl sm:text-5xl rounded-sm"
                 />
+
                 <input
                   type="text"
                   value={headerContent.titleLine2}
-                  onChange={(e) => setHeaderContent({ ...headerContent, titleLine2: e.target.value })}
-                  className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] italic p-2 w-full text-2xl sm:text-4xl rounded-sm"
+                  onChange={(e) =>
+                    setHeaderContent({ ...headerContent, titleLine2: e.target.value })
+                  }
+                  className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] italic p-2 w-full text-3xl sm:text-5xl rounded-sm"
                 />
               </div>
             ) : (
               <>
-                {headerContent.titleLine1}
-                <br />
-                <span className="text-[#C7AA70] italic">{headerContent.titleLine2}</span>
+                <span className="block">
+                  {headerContent.titleLine1}
+                </span>
+
+                <span className="block italic text-[#E8BC72]">
+                  {headerContent.titleLine2}
+                </span>
               </>
             )}
           </h1>

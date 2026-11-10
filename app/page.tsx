@@ -237,37 +237,44 @@ export default function Home() {
 </div>
 
           
-          {/* Heading */}
-          <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl font-normal leading-[1.15] sm:leading-[1.1] text-[#F5F2E9] mb-6 sm:mb-8 tracking-tight max-w-4xl">
-            {isEditing ? (
-              <div className="space-y-2">
-                <input 
-                  type="text"
-                  value={content.headingLine1}
-                  onChange={(e) => setContent({...content, headingLine1: e.target.value})}
-                  className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-5xl rounded-sm"
-                />
-                <input 
-                  type="text"
-                  value={content.headingLine2}
-                  onChange={(e) => setContent({...content, headingLine2: e.target.value})}
-                  className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-5xl rounded-sm"
-                />
-                <input 
-                  type="text"
-                  value={content.headingItalic}
-                  onChange={(e) => setContent({...content, headingItalic: e.target.value})}
-                  className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] italic p-2 w-full text-2xl sm:text-5xl rounded-sm"
-                />
-              </div>
-            ) : (
-              <>
-                {content.headingLine1} <br />
-                {content.headingLine2} <br />
-                <span className="text-[#C7AA70] italic">{content.headingItalic}</span>
-              </>
-            )}
-          </h1>
+
+{/* Heading */}
+<h1 className="font-serif font-normal text-[#F5F2E9] mb-6 sm:mb-8 tracking-tight max-w-4xl">
+  {isEditing ? (
+    <div className="space-y-2">
+      <input
+        type="text"
+        value={content.headingLine1}
+        onChange={(e) => setContent({...content, headingLine1: e.target.value})}
+        className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-5xl rounded-sm"
+      />
+      <input
+        type="text"
+        value={content.headingLine2}
+        onChange={(e) => setContent({...content, headingLine2: e.target.value})}
+        className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-5xl rounded-sm"
+      />
+      <input
+        type="text"
+        value={content.headingItalic}
+        onChange={(e) => setContent({...content, headingItalic: e.target.value})}
+        className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] italic p-2 w-full text-2xl sm:text-5xl rounded-sm"
+      />
+    </div>
+  ) : (
+    <>
+      <span className="block text-[2rem] sm:text-6xl lg:text-7xl leading-[1.2] sm:leading-[1.1]">
+        {content.headingLine1}
+      </span>
+      <span className="block text-[2rem] sm:text-6xl lg:text-7xl leading-[1.2] sm:leading-[1.1]">
+        {content.headingLine2}
+      </span>
+      <span className="block text-[2rem] sm:text-6xl lg:text-7xl leading-[1.2] sm:leading-[1.1] text-[#C7AA70] italic">
+        {content.headingItalic}
+      </span>
+    </>
+  )}
+</h1>
 
           {/* Description Paragraph */}
           {isEditing ? (
