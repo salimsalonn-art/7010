@@ -18,9 +18,8 @@ export default function ContactPage() {
 
   // Editable Content State
   const [content, setContent] = useState({
-    tag: "Inquiry",
     title: "Get in Touch",
-    description: "Select the capabilities you require below to start a confidential discussion with our leadership."
+    description: "Whether you're navigating a complex challenge, exploring new opportunities, or seeking independent strategic counsel, we welcome the opportunity to connect."
   });
 
   // Load Saved Content from Firebase Firestore on mount
@@ -64,16 +63,16 @@ export default function ContactPage() {
     }
   };
 
-  const servicesList = [
-    "General Inquiry",
-    "Strategic Communications",
-    "Geopolitical Risk & Strategic Advisory",
-    "Media Relations & Executive Positioning",
-    "Crisis Communications & Reputation Management"
-  ];
+ const servicesList = [
+  "General Inquiry",
+  "Strategic Communications",
+  "Geopolitical Risk & Strategic Advisory",
+  "Media Relations & Executive Positioning",
+  "Crisis Communications & Reputation Management"
+];
 
   return (
-    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative">
+    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden flex flex-col justify-between">
       
       {/* DISCREET EDIT TOGGLE (Bottom Right) */}
       <div className="fixed bottom-4 right-4 z-50">
@@ -200,56 +199,54 @@ export default function ContactPage() {
         )}
       </nav>
 
-      {/* CONTACT CONTENT SECTION */}
-      <section className="py-24 sm:py-32 max-w-3xl mx-auto px-5 sm:px-6">
-        <div className="text-center mb-8 sm:mb-10">
-          {/* Tag */}
-          {isEditing ? (
-            <input 
-              type="text"
-              value={content.tag}
-              onChange={(e) => setContent({...content, tag: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 mb-2 w-full max-w-xs mx-auto block rounded-sm text-center"
-            />
-          ) : (
-            <span className="text-xs font-mono uppercase tracking-widest text-[#C7AA70] block mb-2 font-semibold">
-              {content.tag}
-            </span>
-          )}
+      {/* CONTACT HERO & FORM SECTION */}
+      <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-4xl mx-auto px-5 sm:px-6 w-full flex-grow">
+        
+        {/* Globe Background Asset at Top Right */}
+        <div className="absolute top-10 right-[-10%] sm:right-[-5%] lg:right-[-5%] w-[450px] sm:w-[650px] lg:w-[750px] h-[450px] sm:h-[650px] lg:h-[750px] pointer-events-none z-0 opacity-40 sm:opacity-50 overflow-hidden">
+          <img 
+            src="/globe.png" 
+            alt="Globe Background" 
+            className="w-full h-full object-contain object-top-right mix-blend-screen"
+          />
+        </div>
 
-          {/* Title */}
+        {/* Header Content */}
+        <div className="relative z-10 text-center mb-12 sm:mb-16">
           {isEditing ? (
             <input 
               type="text"
               value={content.title}
               onChange={(e) => setContent({...content, title: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] font-serif text-3xl sm:text-5xl mb-4 p-2 w-full rounded-sm text-center"
+              className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] font-serif text-3xl sm:text-5xl mb-3 p-2 w-full max-w-md mx-auto block rounded-sm text-center"
             />
           ) : (
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#F5F2E9] mb-4 tracking-tight">
+            <h1 className="font-serif text-4xl sm:text-6xl text-[#F5F2E9] mb-3 tracking-tight">
               {content.title}
-            </h2>
+            </h1>
           )}
 
-          {/* Subtitle Description */}
+          <div className="w-12 h-0.5 bg-[#C7AA70] mx-auto mb-6"></div>
+
           {isEditing ? (
             <textarea 
               rows={3}
               value={content.description}
               onChange={(e) => setContent({...content, description: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-slate-400 text-xs sm:text-sm p-2 w-full rounded-sm text-center max-w-lg mx-auto block"
+              className="bg-[#121F42] border border-[#C7AA70] text-slate-300 text-xs sm:text-sm p-3 w-full max-w-xl mx-auto block rounded-sm text-center"
             />
           ) : (
-            <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto font-light">
+            <p className="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed">
               {content.description}
             </p>
           )}
         </div>
 
-        <div className="border border-slate-800 p-6 sm:p-10 bg-[#121F42] shadow-2xl rounded-sm">
+        {/* Contact Form Container */}
+        <div className="relative z-10 border border-slate-800 p-6 sm:p-12 bg-[#121F42]/95 backdrop-blur-sm shadow-2xl rounded-sm">
           {formSubmitted ? (
-            <div className="text-center py-8">
-              <div className="w-12 h-12 bg-[#C7AA70]/20 border border-[#C7AA70] text-[#C7AA70] rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
+            <div className="text-center py-12">
+              <div className="w-14 h-14 bg-[#C7AA70]/20 border border-[#C7AA70] text-[#C7AA70] rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl">
                 ✓
               </div>
               <h3 className="font-serif text-2xl text-[#F5F2E9] mb-2">Message Received</h3>
@@ -272,21 +269,20 @@ export default function ContactPage() {
                   setFormSubmitted(true);
                 }
               }} 
-              className="space-y-5"
+              className="space-y-6"
             >
               <input type="hidden" name="access_key" value="535b5f06-63bd-4115-a97d-b4c2be99c128" />
-              <input type="hidden" name="replyto" value="salimsalonn@gmail.com" />
               <input type="hidden" name="Selected Service" value={selectedService} />
 
-              {/* OPTIONAL SERVICE / GENERAL INQUIRY SELECTION */}
+              {/* INQUIRY TYPE SELECTOR */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#C7AA70] mb-2 font-semibold">
-                  Inquiry Type 
+                <label className="block text-[11px] font-mono uppercase tracking-[0.15em] text-[#C7AA70] mb-2 font-semibold">
+                  Inquiry Type
                 </label>
                 <select
                   value={selectedService}
                   onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors rounded-sm"
+                  className="w-full bg-[#0A1128] border border-slate-800 p-3.5 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors rounded-sm"
                 >
                   {servicesList.map((service, idx) => (
                     <option key={idx} value={service} className="bg-[#0A1128] text-white">
@@ -296,45 +292,68 @@ export default function ContactPage() {
                 </select>
               </div>
 
-              {/* NAME & OPTIONAL ORGANIZATION */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* FULL NAME & ORGANIZATION */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
+                  <label className="block text-[11px] font-mono uppercase tracking-[0.15em] text-slate-400 mb-2 font-semibold">
                     Full Name <span className="text-[#C7AA70]">*</span>
                   </label>
-                  <input required type="text" name="Full Name" placeholder="Jane Doe" className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
+                  <input required type="text" name="Full Name" placeholder="Jane Doe" className="w-full bg-[#0A1128] border border-slate-800 p-3.5 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
                 </div>
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
+                  <label className="block text-[11px] font-mono uppercase tracking-[0.15em] text-slate-400 mb-2 font-semibold">
                     Organization
                   </label>
-                  <input type="text" name="Organization" placeholder="Company / Sovereign Entity" className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
+                  <input type="text" name="Organization" placeholder="Company / Sovereign Entity" className="w-full bg-[#0A1128] border border-slate-800 p-3.5 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
                 </div>
               </div>
 
-              {/* EMAIL */}
+              {/* EMAIL ADDRESS */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
-                  Corporate Email <span className="text-[#C7AA70]">*</span>
+                <label className="block text-[11px] font-mono uppercase tracking-[0.15em] text-slate-400 mb-2 font-semibold">
+                  Email Address <span className="text-[#C7AA70]">*</span>
                 </label>
-                <input required type="email" name="Email" placeholder="name@organization.com" className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
+                <input required type="email" name="Email" placeholder="name@organization.com" className="w-full bg-[#0A1128] border border-slate-800 p-3.5 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm" />
               </div>
 
-              {/* REQUIRED BLANK MESSAGE FIELD */}
+              {/* MESSAGE */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
+                <label className="block text-[11px] font-mono uppercase tracking-[0.15em] text-slate-400 mb-2 font-semibold">
                   Message <span className="text-[#C7AA70]">*</span>
                 </label>
-                <textarea required rows={4} name="Message" placeholder="Type your message here..." className="w-full bg-[#0A1128] border border-slate-800 p-3 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm resize-none" />
+                <textarea required rows={5} name="Message" placeholder="How can we help?" className="w-full bg-[#0A1128] border border-slate-800 p-3.5 text-sm text-white focus:outline-none focus:border-[#C7AA70] transition-colors placeholder:text-slate-600 rounded-sm resize-none" />
               </div>
 
-              <button type="submit" className="w-full py-4 bg-[#C7AA70] text-black font-semibold text-xs uppercase tracking-widest hover:bg-[#b5985e] transition-colors shadow-lg rounded-sm">
+              <button type="submit" className="w-full py-4 bg-[#C7AA70] text-black font-semibold text-xs uppercase tracking-[0.2em] hover:bg-[#b5985e] transition-colors shadow-lg rounded-sm">
                 Send Inquiry
               </button>
             </form>
           )}
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="py-12 bg-[#060B1A] border-t border-slate-800 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/logo.png" 
+              alt="7010 Advisory Logo" 
+              className="h-8 w-auto object-contain rounded"
+            />
+          </div>
+          
+          <div className="flex items-center space-x-6 uppercase tracking-widest text-[11px] font-semibold text-slate-400">
+            <a href="/services" className="hover:text-[#C7AA70] transition-colors">Strategic Communications</a>
+            <span>|</span>
+            <a href="/services" className="hover:text-[#C7AA70] transition-colors">Geopolitical Risk Analysis</a>
+            <span>|</span>
+            <a href="/services" className="hover:text-[#C7AA70] transition-colors">Business Advisory</a>
+          </div>
+
+          <div className="text-slate-500 text-[11px]">© 2026 7010 Advisory. All rights reserved.</div>
+        </div>
+      </footer>
     </main>
   );
 }
