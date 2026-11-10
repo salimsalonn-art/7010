@@ -4,6 +4,39 @@ import React, { useState, useEffect } from 'react';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
+const DEFAULT_SERVICES = [
+  {
+    title: "Strategic Communications",
+    description: "Develop and deliver tailored communications strategies that shape narratives, build credibility, and drive engagement.",
+    icon: "megaphone"
+  },
+  {
+    title: "Crisis Communications",
+    description: "Prepare for, manage, and respond to high-stakes situations with speed, precision, and strategic clarity.",
+    icon: "shield"
+  },
+  {
+    title: "Geopolitical Advisory",
+    description: "Assess political and security developments, identify risks and opportunities, and provide actionable insights for decision-makers.",
+    icon: "globe"
+  },
+  {
+    title: "Executive Positioning",
+    description: "Define and elevate leadership profiles through targeted media engagement, thought leadership, and high-impact platforms.",
+    icon: "users"
+  },
+  {
+    title: "Market Entry & Business Advisory",
+    description: "Support market assessment, stakeholder mapping, and introductions to help organizations evaluate and pursue opportunities in new or priority markets.",
+    icon: "presentation"
+  },
+  {
+    title: "Media Engagement & Training",
+    description: "Prepare leaders and teams for high-visibility media, investor, and policy engagements through practical, scenario-based training.",
+    icon: "chat"
+  }
+];
+
 export default function ServicesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -16,59 +49,15 @@ export default function ServicesPage() {
 
   // Editable Page Content State
   const [headerContent, setHeaderContent] = useState({
-    tag: "Capabilities",
-    title: "Our Core Services",
-    subtitle: "Rigorous analysis and discrete execution tailored for high-stakes environments across North America and the Middle East."
+    tag: "OUR SERVICES",
+    titleLine1: "Strategic Counsel.",
+    titleLine2: "Real-World Impact.",
+    subtitle: "Targeted advisory and communications support that helps organizations anticipate risk, navigate change, and advance their objectives in complex environments."
   });
 
-  const [servicesList, setServicesList] = useState([
-    {
-      title: "Strategic Communications",
-      image: "/sc.png",
-      description: "Data-driven media positioning, messaging architecture, and strategic advisory targeting high-impact publications and digital platforms.",
-      bullets: [
-        "Messaging Architecture",
-        "Media Positioning",
-        "Stakeholder Engagement",
-        "Campaign Strategy"
-      ]
-    },
-    {
-      title: "Geopolitical Risk & Strategic Advisory",
-      image: "/gr.png",
-      description: "In-depth strategic forecasting and risk evaluation for sovereign and institutional capital navigating volatile global markets.",
-      bullets: [
-        "Strategic Forecasting",
-        "Scenario Planning",
-        "Risk Evaluation & Mitigation",
-        "Cross-Border Alignment"
-      ]
-    },
-    {
-      title: "Media Relations & Executive Positioning",
-      image: "/ec.png",
-      description: "Tailored brand elevation, high-tier media outreach, and executive profiling for leaders, institutions, and public figures.",
-      bullets: [
-        "Executive Profiling",
-        "Tier-1 Media Outreach",
-        "Media Training",
-        "Personal Branding"
-      ]
-    },
-    {
-      title: "Crisis Communications & Reputation Management",
-      image: "/pr.png",
-      description: "Comprehensive crisis mitigation strategies, reputation defense, and rapid-response messaging for high-stakes environments.",
-      bullets: [
-        "Crisis Mitigation",
-        "Reputation Defense",
-        "Rapid Response Messaging",
-        "Issue Management"
-      ]
-    }
-  ]);
+  const [servicesList, setServicesList] = useState(DEFAULT_SERVICES);
 
-  // Load Saved Content from Firebase Firestore on mount
+  // Load Saved Content from Firebase Firestore on mount (with fallbacks)
   useEffect(() => {
     const fetchContent = async () => {
       try {
@@ -76,8 +65,24 @@ export default function ServicesPage() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const data = docSnap.data();
-          if (data.headerContent) setHeaderContent(data.headerContent);
-          if (data.servicesList) setServicesList(data.servicesList);
+          
+          if (data.headerContent) {
+            setHeaderContent({
+              tag: data.headerContent.tag || "OUR SERVICES",
+              titleLine1: data.headerContent.titleLine1 || "Strategic Counsel.",
+              titleLine2: data.headerContent.titleLine2 || "Real-World Impact.",
+              subtitle: data.headerContent.subtitle || "Targeted advisory and communications support that helps organizations anticipate risk, navigate change, and advance their objectives in complex environments."
+            });
+          }
+
+          if (data.servicesList && Array.isArray(data.servicesList)) {
+            const merged = DEFAULT_SERVICES.map((def, idx) => ({
+              title: data.servicesList[idx]?.title || def.title,
+              description: data.servicesList[idx]?.description || def.description,
+              icon: def.icon
+            }));
+            setServicesList(merged);
+          }
         }
       } catch (err) {
         console.error("Error fetching services page content:", err);
@@ -118,15 +123,52 @@ export default function ServicesPage() {
     setServicesList(updated);
   };
 
-  // Update Individual Bullet Point Text
-  const updateBulletPoint = (serviceIndex: number, bulletIndex: number, value: string) => {
-    const updated = [...servicesList];
-    updated[serviceIndex].bullets[bulletIndex] = value;
-    setServicesList(updated);
+  // Helper to render matching outline icons exactly matching reference image
+  const renderIcon = (iconType: string) => {
+    switch (iconType) {
+      case 'megaphone':
+        return (
+          <svg className="w-7 h-7 text-[#C7AA70]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+          </svg>
+        );
+      case 'shield':
+        return (
+          <svg className="w-7 h-7 text-[#C7AA70]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+          </svg>
+        );
+      case 'globe':
+        return (
+          <svg className="w-7 h-7 text-[#C7AA70]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.25m0 0A11.936 11.936 0 0112 15c-3.327 0-6.34-1.34-8.516-3.5m0 0A8.96 8.96 0 013 12c0-.778.099-1.533.284-2.25m0 0A11.936 11.936 0 0012 9c3.327 0 6.34 1.34 8.516 3.5" />
+          </svg>
+        );
+      case 'users':
+        return (
+          <svg className="w-7 h-7 text-[#C7AA70]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.2v.002M3 18.72a9.094 9.094 0 013.741-.479 3 3 0 014.682-2.72m-.94 3.2v.002M12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" />
+          </svg>
+        );
+      case 'presentation':
+        return (
+          <svg className="w-7 h-7 text-[#C7AA70]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 19.5h16.5A2.25 2.25 0 0022.5 17.25V6.75A2.25 2.25 0 0020.25 4.5H9.75a2.25 2.25 0 00-2.25 2.25v3.75m0 0h11.25m-11.25 0v6m3-9.75l3 3m0 0l-3 3m3-3H8.25" />
+          </svg>
+        );
+      case 'chat':
+        return (
+          <svg className="w-7 h-7 text-[#C7AA70]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a6.526 6.526 0 00-3.34-3.338 6.526 6.526 0 00-6.19 0c-1.259.62-2.281 1.642-2.9 2.9m12.43 3.778c.022.355.034.712.034 1.07 0 2.214-1.29 4.14-3.21 5.093M4.25 15.25v-4.286c0-.97.616-1.813 1.5-2.097m10.75-.5a6.526 6.526 0 00-3.34-3.338 6.526 6.526 0 00-6.19 0c-1.259.62-2.281 1.642-2.9 2.9" />
+          </svg>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
-    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative">
+    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden">
       
       {/* DISCREET EDIT TOGGLE (Bottom Right) */}
       <div className="fixed bottom-4 right-4 z-50">
@@ -213,14 +255,14 @@ export default function ServicesPage() {
       <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#253449]/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
           <a href="/" className="flex items-center space-x-0 -ml-2 sm:-ml-3">
-  <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center justify-start">
-    <img
-      src="/logo.png"
-      alt="7010 Advisory Logo"
-      className="h-full w-full object-contain object-left"
-    />
-  </div>
-</a>
+            <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center justify-start">
+              <img
+                src="/logo.png"
+                alt="7010 Advisory Logo"
+                className="h-full w-full object-contain object-left"
+              />
+            </div>
+          </a>
           <div className="hidden md:flex items-center space-x-12 text-xs font-semibold uppercase tracking-widest text-[#F5F2E9]/80">
             <a href="/" className="hover:text-[#C7AA70] transition-colors">Home</a>
             <a href="/about" className="hover:text-[#C7AA70] transition-colors">About</a>
@@ -253,36 +295,58 @@ export default function ServicesPage() {
         )}
       </nav>
 
-      {/* SERVICES CONTENT SECTION */}
-      <section className="py-24 sm:py-32 max-w-7xl mx-auto px-5 sm:px-6">
-        <div className="max-w-3xl mb-10 sm:mb-12">
-          {/* Section Tag */}
+      {/* SERVICES HERO & CONTENT SECTION */}
+      <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-7xl mx-auto px-5 sm:px-6">
+        
+        {/* Globe Background Asset at Top Right */}
+        <div className="absolute top-0 right-[-10%] sm:right-[-5%] lg:right-[-2%] w-[450px] sm:w-[650px] lg:w-[800px] h-[450px] sm:h-[650px] lg:h-[800px] pointer-events-none z-0 opacity-40 sm:opacity-50 overflow-hidden">
+          <img 
+            src="/globe.png" 
+            alt="Globe Background" 
+            className="w-full h-full object-contain object-top-right mix-blend-screen"
+          />
+        </div>
+
+        {/* Header Content */}
+        <div className="relative z-10 max-w-3xl mb-16 sm:mb-20">
+          {/* Section Tag Badge */}
           {isEditing ? (
             <input 
               type="text"
               value={headerContent.tag}
               onChange={(e) => setHeaderContent({...headerContent, tag: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 mb-2 w-full rounded-sm"
+              className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] p-2 mb-4 w-full max-w-xs rounded-sm block"
             />
           ) : (
-            <span className="text-xs font-mono uppercase tracking-widest text-[#C7AA70] block mb-2 font-semibold">
+            <div className="inline-block px-3 py-1 bg-[#121F42]/80 border border-[#C7AA70]/40 text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] mb-4 rounded-sm shadow-sm">
               {headerContent.tag}
-            </span>
+            </div>
           )}
 
           {/* Section Title */}
-          {isEditing ? (
-            <input 
-              type="text"
-              value={headerContent.title}
-              onChange={(e) => setHeaderContent({...headerContent, title: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] font-serif text-3xl sm:text-5xl mb-4 p-2 w-full rounded-sm"
-            />
-          ) : (
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#F5F2E9] mb-4 sm:mb-6 tracking-tight">
-              {headerContent.title}
-            </h2>
-          )}
+          <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl text-[#F5F2E9] mb-6 tracking-tight leading-[1.1]">
+            {isEditing ? (
+              <div className="space-y-2">
+                <input 
+                  type="text"
+                  value={headerContent.titleLine1}
+                  onChange={(e) => setHeaderContent({...headerContent, titleLine1: e.target.value})}
+                  className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-4xl rounded-sm"
+                />
+                <input 
+                  type="text"
+                  value={headerContent.titleLine2}
+                  onChange={(e) => setHeaderContent({...headerContent, titleLine2: e.target.value})}
+                  className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] italic p-2 w-full text-2xl sm:text-4xl rounded-sm"
+                />
+              </div>
+            ) : (
+              <>
+                {headerContent.titleLine1} <br />
+                <span className="text-[#C7AA70] italic">{headerContent.titleLine2}</span>
+              </>
+            )}
+          </h1>
 
           {/* Section Subtitle */}
           {isEditing ? (
@@ -290,44 +354,40 @@ export default function ServicesPage() {
               rows={3}
               value={headerContent.subtitle}
               onChange={(e) => setHeaderContent({...headerContent, subtitle: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-slate-300 text-sm p-2 w-full rounded-sm"
+              className="bg-[#121F42] border border-[#C7AA70] text-slate-300 text-sm sm:text-base p-3 w-full rounded-sm"
             />
           ) : (
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
               {headerContent.subtitle}
             </p>
           )}
         </div>
 
-        {/* Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        {/* Services Cards Grid (3 Columns) */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {servicesList.map((service, index) => (
             <div 
               key={index} 
-              className="relative p-5 sm:p-6 bg-[#121F42] border border-slate-800 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-md overflow-hidden rounded-sm min-h-[300px]"
+              className="p-6 sm:p-8 bg-[#121F42] border border-slate-800 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-lg rounded-sm min-h-[280px]"
             >
-              <div 
-                className="absolute inset-0 bg-cover bg-center opacity-100 group-hover:opacity-115 transition-all duration-500 pointer-events-none"
-                style={{ backgroundImage: `url(${service.image})` }}
-              ></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#121F42] via-[#121F42]/90 to-[#121F42]/75 pointer-events-none"></div>
+              <div>
+                <div className="mb-6">
+                  {renderIcon(service.icon)}
+                </div>
 
-              <div className="relative z-10 space-y-3">
                 {/* Editable Card Title */}
                 {isEditing ? (
                   <input
                     type="text"
                     value={service.title}
                     onChange={(e) => updateServiceField(index, 'title', e.target.value)}
-                    className="bg-[#0A1128] border border-[#C7AA70] text-white font-serif text-xl sm:text-2xl p-2 w-full rounded-sm"
+                    className="bg-[#0A1128] border border-[#C7AA70] text-white font-serif text-lg sm:text-xl p-2 w-full rounded-sm mb-3"
                   />
                 ) : (
-                  <h3 className="font-serif text-xl sm:text-2xl text-white font-normal tracking-tight">
+                  <h3 className="font-serif text-lg sm:text-xl text-[#F5F2E9] font-normal tracking-tight mb-3">
                     {service.title}
                   </h3>
                 )}
-
-                <div className="h-0.5 w-10 bg-[#C7AA70] my-4"></div>
 
                 {/* Editable Card Description */}
                 {isEditing ? (
@@ -338,35 +398,24 @@ export default function ServicesPage() {
                     className="bg-[#0A1128] border border-[#C7AA70] text-slate-300 text-xs sm:text-sm p-2 w-full rounded-sm"
                   />
                 ) : (
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
                     {service.description}
                   </p>
                 )}
               </div>
-
-              {/* Editable Bullets List */}
-              <div className="relative z-10 border-t border-slate-800 pt-5 mt-6">
-                <ul className="space-y-2.5">
-                  {service.bullets.map((bullet, idx) => (
-                    <li key={idx} className="text-xs text-slate-200 font-medium flex items-center space-x-3">
-                      <span className="w-1.5 h-1.5 bg-[#C7AA70] rounded-full shrink-0"></span>
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          value={bullet}
-                          onChange={(e) => updateBulletPoint(index, idx, e.target.value)}
-                          className="bg-[#0A1128] border border-[#C7AA70] text-slate-200 text-xs p-1 w-full rounded-sm"
-                        />
-                      ) : (
-                        <span className="tracking-wide">{bullet}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA Button */}
+        <div className="relative z-10 mt-16 text-center">
+          <a 
+            href="/contact" 
+            className="inline-flex items-center space-x-3 px-8 py-4 bg-transparent border border-[#C7AA70] text-[#F5F2E9] hover:bg-[#C7AA70] hover:text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 rounded-sm shadow-lg"
+          >
+            <span>Discuss Your Needs</span>
+            <span>→</span>
+          </a>
         </div>
       </section>
     </main>
