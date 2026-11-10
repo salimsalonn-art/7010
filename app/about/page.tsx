@@ -296,7 +296,7 @@ export default function AboutPage() {
 
   <div
     className="absolute inset-0 bg-no-repeat
-    bg-[length:100%_100%]
+    bg-[length:140%_100%]
     sm:bg-cover bg-center"
     style={{
       backgroundImage: "url('/right.png')",
