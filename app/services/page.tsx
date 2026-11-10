@@ -376,7 +376,8 @@ export default function ServicesPage() {
           {servicesList.map((service, index) => (
             <div
   key={index}
-  className="relative p-5 sm:p-8 bg-[#121F42] 
+  className="relative p-5 sm:p-8 bg-[#121F42] border border-[#C7AA70]/20 hover:border-[#C7AA70]/60 transition-all duration-300 flex flex-col justify-between group shadow-lg rounded-md sm:rounded-sm min-h-0 sm:min-h-[280px] border-l-2 sm:border-l"
+>
   border border-[#C7AA70]/20 
   hover:border-[#C7AA70]/60 
   transition-all duration-300 
@@ -384,18 +385,11 @@ export default function ServicesPage() {
   shadow-lg rounded-md sm:rounded-sm 
   min-h-0 sm:min-h-[280px]
   border-l-2 sm:border-l"
->
+
               <div>
                 <div className="mb-5 sm:mb-6">
-  <div className="w-11 h-11 sm:w-12 sm:h-12 
-    flex items-center justify-center 
-    border border-[#C7AA70]/30 
-    bg-[#0A1128]/60 rounded-sm 
-    group-hover:border-[#C7AA70]/70 
-    transition-colors duration-300">
-
+  <div className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-[#C7AA70]/30 bg-[#0A1128]/60 rounded-sm group-hover:border-[#C7AA70]/70 transition-colors duration-300">
     {renderIcon(service.icon)}
-
   </div>
 </div>
 
