@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -24,20 +24,58 @@ export default function Home() {
     description: "7010 Advisory is a Washington, DC-based boutique advisory firm specializing in strategic communications, geopolitical risk, and reputation management."
   });
 
-  // AUTOMATIC MOBILE HEADING FONT SIZE
-  // Uses the longest Firebase heading line to determine font size.
-const mobileHeadingLength = (
-  content.headingLine1 +
-  " " +
-  content.headingLine2 +
-  " " +
-  content.headingItalic
-).length;
+  // MOBILE HEADING: measure the actual Firebase text and fit the
+  // longest line to the available mobile width. Desktop is unaffected.
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [mobileHeadingFontSize, setMobileHeadingFontSize] = useState(34);
 
-const mobileHeadingFontSize = Math.max(
-  17,
-  Math.min(34, 34 - Math.max(0, mobileHeadingLength - 20) * 0.35)
-);
+  useEffect(() => {
+    const headingElement = headingRef.current;
+    if (!headingElement) return;
+
+    const measureHeading = () => {
+      const availableWidth = headingElement.getBoundingClientRect().width;
+      if (!availableWidth) return;
+
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      if (!context) return;
+
+      const headingStyle = window.getComputedStyle(headingElement);
+      const fontFamily = headingStyle.fontFamily;
+      const fontWeight = headingStyle.fontWeight || '400';
+      const referenceFontSize = 34;
+
+      const lines = [
+        { text: content.headingLine1 || '', italic: false },
+        { text: content.headingLine2 || '', italic: false },
+        { text: content.headingItalic || '', italic: true },
+      ];
+
+      let widestLine = 0;
+
+      lines.forEach(({ text, italic }) => {
+        context.font = `${italic ? 'italic ' : ''}${fontWeight} ${referenceFontSize}px ${fontFamily}`;
+        widestLine = Math.max(widestLine, context.measureText(text).width);
+      });
+
+      if (!widestLine) {
+        setMobileHeadingFontSize(34);
+        return;
+      }
+
+      // Small safety margin prevents the text touching the screen edge.
+      const fittedSize = referenceFontSize * ((availableWidth - 8) / widestLine);
+      setMobileHeadingFontSize(Math.max(17, Math.min(referenceFontSize, fittedSize)));
+    };
+
+    measureHeading();
+
+    const resizeObserver = new ResizeObserver(measureHeading);
+    resizeObserver.observe(headingElement);
+
+    return () => resizeObserver.disconnect();
+  }, [content.headingLine1, content.headingLine2, content.headingItalic]);
 
   // Load Saved Content from Firebase Firestore on mount
   useEffect(() => {
@@ -326,7 +364,7 @@ const mobileHeadingFontSize = Math.max(
           </div>
 
           {/* HEADING */}
-          <h1 className="font-serif font-normal text-[#F5F2E9] mb-6 sm:mb-8 tracking-tight max-w-4xl">
+          <h1 ref={headingRef} className="font-serif font-normal text-[#F5F2E9] mb-6 sm:mb-8 tracking-tight max-w-4xl">
 
             {isEditing ? (
               <div className="space-y-2">
@@ -361,19 +399,19 @@ const mobileHeadingFontSize = Math.max(
               </div>
             ) : (
               <>
-                {/* Mobile: dynamically adjusts based on Firebase text length */}
-              <span
-  className="block sm:hidden leading-[1.2] break-words"
-  style={{
-    fontSize: `clamp(17px, ${mobileHeadingFontSize}px, 34px)`,
-    transition: "font-size 0.2s ease"
-  }}
->
-  {content.headingLine1} {content.headingLine2}{" "}
-  <span className="text-[#C7AA70] italic">
-    {content.headingItalic}
-  </span>
-</span>
+                {/* Mobile: each Firebase line is measured and fitted to the available width */}
+                <span
+                  className="block sm:hidden leading-[1.2] break-words"
+                  style={{
+                    fontSize: `${mobileHeadingFontSize}px`,
+                    transition: 'font-size 0.2s ease',
+                    overflowWrap: 'anywhere',
+                  }}
+                >
+                  <span className="block">{content.headingLine1}</span>
+                  <span className="block">{content.headingLine2}</span>
+                  <span className="block text-[#C7AA70] italic">{content.headingItalic}</span>
+                </span>
 
                 {/* Desktop: original styling preserved */}
                 <span className="hidden sm:block text-6xl lg:text-7xl leading-[1.1]">
