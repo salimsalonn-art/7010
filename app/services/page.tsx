@@ -298,17 +298,25 @@ export default function ServicesPage() {
       {/* SERVICES HERO & CONTENT SECTION */}
       <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-7xl mx-auto px-5 sm:px-6">
         
-        {/* Globe Background Asset at Top Right */}
-        <div className="absolute top-0 right-[-10%] sm:right-[-5%] lg:right-[-2%] w-[450px] sm:w-[650px] lg:w-[800px] h-[450px] sm:h-[650px] lg:h-[800px] pointer-events-none z-0 opacity-40 sm:opacity-50 overflow-hidden">
-          <img 
-            src="/globe.png" 
-            alt="Globe Background" 
-            className="w-full h-full object-contain object-top-right mix-blend-screen"
-          />
-        </div>
+        {/* Globe Background Asset */}
+{/* Globe Background Asset */}
+<div className="absolute top-0 right-[-90px] sm:right-[-5%] lg:right-[-2%]
+  w-[260px] h-[260px]
+  sm:w-[650px] sm:h-[650px]
+  lg:w-[800px] lg:h-[800px]
+  pointer-events-none z-0
+  opacity-15 sm:opacity-50
+  overflow-hidden">
+
+  <img
+    src="/globe.png"
+    alt="Globe Background"
+    className="w-full h-full object-contain object-top-right mix-blend-screen"
+  />
+</div>
 
         {/* Header Content */}
-        <div className="relative z-10 max-w-3xl mb-16 sm:mb-20">
+        <div className="relative z-10 max-w-3xl mb-12 sm:mb-20">
           {/* Section Tag Badge */}
           {isEditing ? (
             <input 
@@ -364,16 +372,32 @@ export default function ServicesPage() {
         </div>
 
         {/* Services Cards Grid (3 Columns) */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {servicesList.map((service, index) => (
-            <div 
-              key={index} 
-              className="p-6 sm:p-8 bg-[#121F42] border border-slate-800 hover:border-[#C7AA70] transition-all duration-300 flex flex-col justify-between group shadow-lg rounded-sm min-h-[280px]"
-            >
+            <div
+  key={index}
+  className="relative p-5 sm:p-8 bg-[#121F42] 
+  border border-[#C7AA70]/20 
+  hover:border-[#C7AA70]/60 
+  transition-all duration-300 
+  flex flex-col justify-between group 
+  shadow-lg rounded-md sm:rounded-sm 
+  min-h-0 sm:min-h-[280px]
+  border-l-2 sm:border-l"
+>
               <div>
-                <div className="mb-6">
-                  {renderIcon(service.icon)}
-                </div>
+                <div className="mb-5 sm:mb-6">
+  <div className="w-11 h-11 sm:w-12 sm:h-12 
+    flex items-center justify-center 
+    border border-[#C7AA70]/30 
+    bg-[#0A1128]/60 rounded-sm 
+    group-hover:border-[#C7AA70]/70 
+    transition-colors duration-300">
+
+    {renderIcon(service.icon)}
+
+  </div>
+</div>
 
                 {/* Editable Card Title */}
                 {isEditing ? (
