@@ -16,7 +16,7 @@ export default function Home() {
 
   // Editable Hero Content State
   const [content, setContent] = useState({
-    badge: "Washington-Based. Globally Connected.",
+    badge: "THE 7010 APPROACH",
     headingLine1: "Navigating Complexity.",
     headingLine2: "Shaping Conversations.",
     headingItalic: "Advancing Interests.",
@@ -213,19 +213,29 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-12">
-          {/* Badge Tag */}
-          {isEditing ? (
-            <input 
-              type="text"
-              value={content.badge}
-              onChange={(e) => setContent({...content, badge: e.target.value})}
-              className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] p-2 mb-4 sm:mb-6 w-full max-w-md rounded-sm block"
-            />
-          ) : (
-            <div className="inline-block px-3 py-1 bg-[#121F42]/80 border border-[#C7AA70]/40 text-[#C7AA70] text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 rounded-sm shadow-sm">
-              {content.badge}
-            </div>
-          )}
+         
+{/* TAG + GOLD LINE */}
+<div className="flex items-center gap-6 mb-8 sm:mb-10">
+
+  {isEditing ? (
+    <input
+      type="text"
+      value={content.badge}
+      onChange={(e) =>
+        setContent({ ...content, badge: e.target.value })
+      }
+      className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
+    />
+  ) : (
+    <span className="text-[#C7AA70] text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] whitespace-nowrap">
+      {content.badge}
+    </span>
+  )}
+
+  <div className="h-[2px] bg-[#C7AA70] w-20 sm:w-40 lg:w-60" />
+
+</div>
+
           
           {/* Heading */}
           <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl font-normal leading-[1.15] sm:leading-[1.1] text-[#F5F2E9] mb-6 sm:mb-8 tracking-tight max-w-4xl">
