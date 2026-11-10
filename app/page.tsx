@@ -26,19 +26,18 @@ export default function Home() {
 
   // AUTOMATIC MOBILE HEADING FONT SIZE
   // Uses the longest Firebase heading line to determine font size.
-  const longestHeadingLineLength = Math.max(
-    content.headingLine1?.length || 0,
-    content.headingLine2?.length || 0,
-    content.headingItalic?.length || 0
-  );
+const mobileHeadingLength = (
+  content.headingLine1 +
+  " " +
+  content.headingLine2 +
+  " " +
+  content.headingItalic
+).length;
 
-  const mobileHeadingFontSize = Math.max(
-    18,
-    Math.min(
-      34,
-      34 - Math.max(0, longestHeadingLineLength - 17) * 1.05
-    )
-  );
+const mobileHeadingFontSize = Math.max(
+  17,
+  Math.min(34, 34 - Math.max(0, mobileHeadingLength - 20) * 0.35)
+);
 
   // Load Saved Content from Firebase Firestore on mount
   useEffect(() => {
@@ -363,15 +362,18 @@ export default function Home() {
             ) : (
               <>
                 {/* Mobile: dynamically adjusts based on Firebase text length */}
-                <span
-                  className="block sm:hidden leading-[1.2] break-words"
-                  style={{ fontSize: `${mobileHeadingFontSize}px` }}
-                >
-                  {content.headingLine1} {content.headingLine2}{" "}
-                  <span className="text-[#C7AA70] italic">
-                    {content.headingItalic}
-                  </span>
-                </span>
+              <span
+  className="block sm:hidden leading-[1.2] break-words"
+  style={{
+    fontSize: `clamp(17px, ${mobileHeadingFontSize}px, 34px)`,
+    transition: "font-size 0.2s ease"
+  }}
+>
+  {content.headingLine1} {content.headingLine2}{" "}
+  <span className="text-[#C7AA70] italic">
+    {content.headingItalic}
+  </span>
+</span>
 
                 {/* Desktop: original styling preserved */}
                 <span className="hidden sm:block text-6xl lg:text-7xl leading-[1.1]">
