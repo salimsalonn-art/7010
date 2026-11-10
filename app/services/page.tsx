@@ -351,7 +351,7 @@ export default function ServicesPage() {
       <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-7xl mx-auto px-5 sm:px-6">
 
         {/* Globe Background Asset */}
-        <div className="absolute top-0 right-[-90px] sm:right-[-5%] lg:right-[-2%] w-[260px] h-[260px] sm:w-[650px] sm:h-[650px] lg:w-[800px] lg:h-[800px] pointer-events-none z-0 opacity-15 sm:opacity-50 overflow-hidden">
+        <div className="absolute top-4 right-[-25px] sm:top-0 sm:right-[-5%] lg:right-[-2%] w-[280px] h-[280px] sm:w-[650px] sm:h-[650px] lg:w-[800px] lg:h-[800px] pointer-events-none z-0 opacity-[0.22] sm:opacity-50 overflow-hidden">
           <img
             src="/globe.png"
             alt=""
