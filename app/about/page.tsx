@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -14,33 +15,40 @@ export default function AboutPage() {
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState('');
 
-  // Editable Content State
+  // Editable Content
   const [content, setContent] = useState({
-    tag: "Global Perspective",
-    titleLine1: "Local Insight.",
-    titleLine2: "Global Perspective.",
-    description: "With deep expertise in Washington and the Middle East and North Africa, and a broader international outlook, we provide tailored guidance to help clients navigate complex political and media environments, manage reputational challenges, and advance their strategic objectives."
+    tag: 'THE 7010 APPROACH',
+    titleLine1: 'Local Insight.',
+    titleLine2: 'Global Perspective.',
+    description:
+      '7010 Advisory is an independent communications and advisory firm working with organizations operating across the United States and international markets. Combining deep media experience, geopolitical insight, and an understanding of the intersection between business and policy, the firm helps clients anticipate challenges, communicate effectively, and pursue new opportunities.'
   });
 
-  // Load Saved Content from Firebase Firestore on mount
+  // Load Saved Content from Firebase
   useEffect(() => {
     const fetchContent = async () => {
       try {
         const docRef = doc(db, 'site_content', 'about_page');
         const docSnap = await getDoc(docRef);
+
         if (docSnap.exists()) {
-          setContent(docSnap.data() as typeof content);
+          setContent({
+            ...content,
+            ...docSnap.data()
+          });
         }
       } catch (err) {
-        console.error("Error fetching about page content:", err);
+        console.error('Error fetching about page content:', err);
       }
     };
+
     fetchContent();
   }, []);
 
-  // Handle Login Authentication
+  // Login Authentication
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (usernameInput === 'admin' && passwordInput === '7010') {
       setIsEditing(true);
       setShowAuthModal(false);
@@ -52,39 +60,40 @@ export default function AboutPage() {
     }
   };
 
-  // Save Edits directly to Firebase Cloud Database
+  // Save Content to Firebase
   const handleSave = async () => {
     try {
       const docRef = doc(db, 'site_content', 'about_page');
       await setDoc(docRef, content);
       setIsEditing(false);
     } catch (err) {
-      console.error("Error saving about page content:", err);
+      console.error('Error saving about page content:', err);
     }
   };
 
   return (
     <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative">
-      
-      {/* DISCREET EDIT TOGGLE (Bottom Right) */}
+
+      {/* DISCREET EDIT MODE */}
       <div className="fixed bottom-4 right-4 z-50">
         {!isEditing ? (
-          <button 
+          <button
             onClick={() => setShowAuthModal(true)}
-            className="opacity-20 hover:opacity-100 transition-opacity bg-[#121F42] border border-slate-700 text-[#C7AA70] text-[10px] uppercase font-mono px-3 py-1.5 rounded shadow-lg"
+            className="opacity-10 hover:opacity-100 transition-opacity duration-300 bg-[#121F42] border border-slate-700 text-[#C7AA70] text-[10px] uppercase font-mono px-3 py-1.5 rounded shadow-lg"
             title="Unlock Edit Mode"
           >
             [ Edit Mode ]
           </button>
         ) : (
           <div className="flex items-center space-x-2 bg-[#121F42] border border-[#C7AA70] p-2 rounded shadow-2xl">
-            <button 
+            <button
               onClick={handleSave}
               className="bg-[#C7AA70] text-black text-xs font-semibold uppercase px-3 py-1 rounded hover:bg-[#b5985e] transition-colors"
             >
               Save & Lock
             </button>
-            <button 
+
+            <button
               onClick={() => setIsEditing(false)}
               className="text-slate-400 text-xs px-2 py-1 hover:text-white"
             >
@@ -98,13 +107,23 @@ export default function AboutPage() {
       {showAuthModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-[#121F42] border border-slate-700 p-6 sm:p-8 rounded-sm max-w-sm w-full shadow-2xl">
-            <h3 className="font-serif text-xl text-[#F5F2E9] mb-1">Client Edit Login</h3>
-            <p className="text-slate-400 text-xs mb-6 font-mono">Enter credentials to unlock text editing.</p>
-            
+
+            <h3 className="font-serif text-xl text-[#F5F2E9] mb-1">
+              Client Edit Login
+            </h3>
+
+            <p className="text-slate-400 text-xs mb-6 font-mono">
+              Enter credentials to unlock text editing.
+            </p>
+
             <form onSubmit={handleLogin} className="space-y-4">
+
               <div>
-                <label className="block text-xs font-mono uppercase text-slate-400 mb-1">Username</label>
-                <input 
+                <label className="block text-xs font-mono uppercase text-slate-400 mb-1">
+                  Username
+                </label>
+
+                <input
                   type="text"
                   required
                   value={usernameInput}
@@ -113,9 +132,13 @@ export default function AboutPage() {
                   placeholder="admin"
                 />
               </div>
+
               <div>
-                <label className="block text-xs font-mono uppercase text-slate-400 mb-1">Password</label>
-                <input 
+                <label className="block text-xs font-mono uppercase text-slate-400 mb-1">
+                  Password
+                </label>
+
+                <input
                   type="password"
                   required
                   value={passwordInput}
@@ -125,7 +148,11 @@ export default function AboutPage() {
                 />
               </div>
 
-              {authError && <p className="text-red-400 text-xs font-mono">{authError}</p>}
+              {authError && (
+                <p className="text-red-400 text-xs font-mono">
+                  {authError}
+                </p>
+              )}
 
               <div className="flex items-center space-x-3 pt-2">
                 <button
@@ -134,14 +161,19 @@ export default function AboutPage() {
                 >
                   Unlock
                 </button>
+
                 <button
                   type="button"
-                  onClick={() => { setShowAuthModal(false); setAuthError(''); }}
+                  onClick={() => {
+                    setShowAuthModal(false);
+                    setAuthError('');
+                  }}
                   className="w-full py-2.5 bg-transparent border border-slate-700 text-slate-300 font-semibold text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors"
                 >
                   Cancel
                 </button>
               </div>
+
             </form>
           </div>
         </div>
@@ -149,117 +181,218 @@ export default function AboutPage() {
 
       {/* NAVIGATION HEADER */}
       <nav className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-[#253449]/95 backdrop-blur-md">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
+
+          {/* LOGO */}
           <a href="/" className="flex items-center space-x-0 -ml-2 sm:-ml-3">
-  <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center justify-start">
-    <img
-      src="/logo.png"
-      alt="7010 Advisory Logo"
-      className="h-full w-full object-contain object-left"
-    />
-  </div>
-</a>
+            <div className="relative h-16 sm:h-20 w-52 sm:w-64 flex items-center justify-start">
+              <img
+                src="/logo.png"
+                alt="7010 Advisory Logo"
+                className="h-full w-full object-contain object-left"
+              />
+            </div>
+          </a>
+
+          {/* DESKTOP NAVIGATION */}
           <div className="hidden md:flex items-center space-x-12 text-xs font-semibold uppercase tracking-widest text-[#F5F2E9]/80">
-            <a href="/" className="hover:text-[#C7AA70] transition-colors">Home</a>
-            <a href="/about" className="text-[#C7AA70]">About</a>
-            <a href="/services" className="hover:text-[#C7AA70] transition-colors">Services</a>
-            <a href="/contact" className="hover:text-[#C7AA70] transition-colors">Contact</a>
+
+            <a href="/" className="hover:text-[#C7AA70] transition-colors">
+              Home
+            </a>
+
+            <a href="/about" className="text-[#C7AA70]">
+              About
+            </a>
+
+            <a href="/services" className="hover:text-[#C7AA70] transition-colors">
+              Services
+            </a>
+
+            <a href="/contact" className="hover:text-[#C7AA70] transition-colors">
+              Contact
+            </a>
+
           </div>
-          {/* Mobile Menu Button */}
-          <button 
+
+          {/* MOBILE MENU BUTTON */}
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden text-[#F5F2E9] focus:outline-none p-2"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
             </svg>
           </button>
+
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* MOBILE DROPDOWN */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#121F42] border-b border-slate-800 px-6 py-6 space-y-4 text-xs font-semibold uppercase tracking-widest">
-            <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-[#F5F2E9] hover:text-[#C7AA70]">Home</a>
-            <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-[#C7AA70]">About</a>
-            <a href="/services" onClick={() => setMobileMenuOpen(false)} className="block text-[#F5F2E9] hover:text-[#C7AA70]">Services</a>
-            <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#F5F2E9] hover:text-[#C7AA70]">Contact</a>
+
+            <a
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-[#F5F2E9] hover:text-[#C7AA70]"
+            >
+              Home
+            </a>
+
+            <a
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-[#C7AA70]"
+            >
+              About
+            </a>
+
+            <a
+              href="/services"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-[#F5F2E9] hover:text-[#C7AA70]"
+            >
+              Services
+            </a>
+
+            <a
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-[#F5F2E9] hover:text-[#C7AA70]"
+            >
+              Contact
+            </a>
+
           </div>
         )}
+
       </nav>
 
-      {/* ABOUT CONTENT SECTION */}
-      <section className="py-24 sm:py-32 max-w-7xl mx-auto px-5 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          <div className="relative flex items-center justify-center">
-            <img
-              src="/second.png"
-              alt="Global Perspective Globe"
-              className="w-full h-auto max-h-[800px] lg:scale-125 object-contain"
-            />
-          </div>
+      {/* ABOUT HERO SECTION */}
+      <section className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-center pt-32 pb-16 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800">
 
-          <div className="flex flex-col justify-center">
-            {/* Tag */}
+        {/* BACKGROUND IMAGE */}
+        <div className="absolute inset-0 z-0">
+
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url('/right.png')"
+            }}
+          />
+
+          {/* DARK LEFT GRADIENT */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#061426] via-[#061426]/95 sm:via-[#061426]/85 to-[#061426]/10" />
+
+          {/* BOTTOM FADE */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#061426]/40 via-transparent to-[#061426]/10" />
+
+        </div>
+
+        {/* HERO CONTENT */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-8">
+
+          {/* TAG */}
+          <div className="flex items-center gap-6 mb-8 sm:mb-10">
+
             {isEditing ? (
-              <input 
+              <input
                 type="text"
                 value={content.tag}
-                onChange={(e) => setContent({...content, tag: e.target.value})}
-                className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 mb-4 w-full rounded-sm"
+                onChange={(e) =>
+                  setContent({ ...content, tag: e.target.value })
+                }
+                className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
               />
             ) : (
-              <span className="text-xs font-mono uppercase tracking-widest text-[#C7AA70] block mb-4 font-semibold">
+              <span className="text-[#C7AA70] text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] whitespace-nowrap">
                 {content.tag}
               </span>
             )}
 
-            {/* Title */}
-            <h2 className="font-serif text-4xl sm:text-6xl text-[#F5F2E9] mb-6 tracking-tight leading-[1.15]">
-              {isEditing ? (
-                <div className="space-y-2">
-                  <input 
-                    type="text"
-                    value={content.titleLine1}
-                    onChange={(e) => setContent({...content, titleLine1: e.target.value})}
-                    className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-4xl rounded-sm"
-                  />
-                  <input 
-                    type="text"
-                    value={content.titleLine2}
-                    onChange={(e) => setContent({...content, titleLine2: e.target.value})}
-                    className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-2xl sm:text-4xl rounded-sm"
-                  />
-                </div>
-              ) : (
-                <>
-                  {content.titleLine1} <br />
-                  <span className="italic text-slate-400">{content.titleLine2}</span>
-                </>
-              )}
-            </h2>
+            <div className="h-[2px] bg-[#C7AA70] w-20 sm:w-40 lg:w-60" />
 
-            {/* Paragraph Description */}
-            {isEditing ? (
-              <textarea 
-                rows={5}
-                value={content.description}
-                onChange={(e) => setContent({...content, description: e.target.value})}
-                className="bg-[#121F42] border border-[#C7AA70] text-slate-300 text-sm sm:text-base p-3 w-full rounded-sm"
-              />
-            ) : (
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-light max-w-xl">
-                {content.description}
-              </p>
-            )}
           </div>
 
+          {/* HEADING */}
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl">
+
+            {isEditing ? (
+              <div className="space-y-3">
+
+                <input
+                  type="text"
+                  value={content.titleLine1}
+                  onChange={(e) =>
+                    setContent({ ...content, titleLine1: e.target.value })
+                  }
+                  className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] p-2 w-full text-3xl sm:text-5xl rounded-sm"
+                />
+
+                <input
+                  type="text"
+                  value={content.titleLine2}
+                  onChange={(e) =>
+                    setContent({ ...content, titleLine2: e.target.value })
+                  }
+                  className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] italic p-2 w-full text-3xl sm:text-5xl rounded-sm"
+                />
+
+              </div>
+            ) : (
+              <>
+                <span className="block">
+                  {content.titleLine1}
+                </span>
+
+                <span className="block italic text-[#E8BC72]">
+                  {content.titleLine2}
+                </span>
+              </>
+            )}
+
+          </h1>
+
+          {/* DESCRIPTION */}
+          {isEditing ? (
+            <textarea
+              rows={6}
+              value={content.description}
+              onChange={(e) =>
+                setContent({ ...content, description: e.target.value })
+              }
+              className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] text-sm sm:text-lg p-3 w-full max-w-3xl rounded-sm"
+            />
+          ) : (
+            <p className="text-[#F5F2E9] text-sm sm:text-lg lg:text-xl leading-relaxed mb-8 max-w-3xl font-light">
+              {content.description}
+            </p>
+          )}
+
         </div>
+
       </section>
+
     </main>
   );
 }

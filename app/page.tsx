@@ -72,8 +72,7 @@ export default function Home() {
         {!isEditing ? (
           <button 
             onClick={() => setShowAuthModal(true)}
-            className="opacity-20 hover:opacity-100 transition-opacity bg-[#121F42] border border-slate-700 text-[#C7AA70] text-[10px] uppercase font-mono px-3 py-1.5 rounded shadow-lg"
-            title="Unlock Edit Mode"
+           className="opacity-10 hover:opacity-100 transition-opacity duration-300 bg-[#121F42] border border-slate-700 text-[#C7AA70] text-[10px] uppercase font-mono px-3 py-1.5 rounded shadow-lg"            title="Unlock Edit Mode"
           >
             [ Edit Mode ]
           </button>
@@ -198,15 +197,19 @@ export default function Home() {
       {/* HERO SECTION */}
       <section id="home" className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center pt-32 pb-12 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800">
         
-        {/* Background Image & Gradient Overlays */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 mix-blend-overlay"
-            style={{ backgroundImage: `url('/background.png')` }}
-          ></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1128] via-[#0A1128]/95 sm:via-[#0A1128]/90 to-[#0A1128]/80 sm:to-[#0A1128]/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-transparent to-[#0A1128]/70"></div>
-        </div>
+       {/* Background Image & Light Gradient Overlays */}
+<div className="absolute inset-0 z-0">
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
+    style={{ backgroundImage: `url('/background.png')` }}
+  ></div>
+
+  {/* Lighter navy overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#0A1128]/60 via-[#0A1128]/35 to-[#0A1128]/20"></div>
+
+  {/* Subtle bottom fade */}
+  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128]/70 via-transparent to-[#0A1128]/10"></div>
+</div>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-12">
