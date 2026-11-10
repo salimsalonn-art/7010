@@ -200,7 +200,7 @@ export default function Home() {
        {/* Background Image & Light Gradient Overlays */}
 <div className="absolute inset-0 z-0">
   <div
-    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
     style={{ backgroundImage: `url('/background.png')` }}
   ></div>
 

@@ -292,22 +292,25 @@ export default function AboutPage() {
       <section className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-center pt-32 pb-16 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800">
 
         {/* BACKGROUND IMAGE */}
-        <div className="absolute inset-0 z-0">
+<div className="absolute inset-0 z-0">
 
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: "url('/right.png')"
-            }}
-          />
+  <div
+    className="absolute inset-0 bg-no-repeat
+    bg-[length:100%_100%]
+    sm:bg-cover bg-center"
+    style={{
+      backgroundImage: "url('/right.png')",
+      backgroundPosition: 'center center',
+    }}
+  />
 
-          {/* DARK LEFT GRADIENT */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#061426] via-[#061426]/95 sm:via-[#061426]/85 to-[#061426]/10" />
+  {/* DARK LEFT GRADIENT */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#061426] via-[#061426]/95 sm:via-[#061426]/85 to-[#061426]/10" />
 
-          {/* BOTTOM FADE */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#061426]/40 via-transparent to-[#061426]/10" />
+  {/* BOTTOM FADE */}
+  <div className="absolute inset-0 bg-gradient-to-t from-[#061426]/40 via-transparent to-[#061426]/10" />
 
-        </div>
+</div>
 
         {/* HERO CONTENT */}
         <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-8">
