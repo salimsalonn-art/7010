@@ -16,9 +16,9 @@ export default function Home() {
   const [authError, setAuthError] = useState('');
 
   // Editable Hero Content State
-  const [content, setContent] = useState({
-    badge: "WHERE GEOPOLITICS, BUSINESS, AND COMMUNICATIONS CONVERGE.
-    headingLine1: "Navigating Complexity.",
+const [content, setContent] = useState({
+  badge: "WHERE GEOPOLITICS, BUSINESS, AND COMMUNICATIONS CONVERGE",
+  headingLine1: "Navigating Complexity.",
     headingLine2: "Shaping Conversations.",
     headingItalic: "Advancing Interests.",
     description: "7010 Advisory is a Washington, DC-based boutique advisory firm specializing in strategic communications, geopolitical risk, and reputation management."
