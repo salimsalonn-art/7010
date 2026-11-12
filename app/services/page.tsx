@@ -444,9 +444,15 @@ const renderIcon = (iconType: string) => {
               className="bg-[#121F42] border border-[#C7AA70] text-slate-300 text-sm sm:text-base p-3 w-full rounded-sm"
             />
           ) : (
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
-              {headerContent.subtitle}
-            </p>
+           <p
+  className="text-slate-300 text-sm sm:text-base leading-relaxed font-bold max-w-2xl"
+  style={{
+    WebkitTextStroke: '0.4px #000000',
+    paintOrder: 'stroke fill',
+  }}
+>
+  {headerContent.subtitle}
+</p>
           )}
         </div>
 
