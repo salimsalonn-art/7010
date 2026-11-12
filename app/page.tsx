@@ -416,7 +416,12 @@ const [content, setContent] = useState({
                 >
                   <span className="block">{content.headingLine1}</span>
                   <span className="block">{content.headingLine2}</span>
-                  <span className="block text-[#C7AA70] italic">{content.headingItalic}</span>
+                 <span
+  className="block text-[#C7AA70] italic"
+  style={{ fontSize: `${mobileHeadingFontSize + 2}px` }}
+>
+  {content.headingItalic}
+</span>
                 </span>
 
                 {/* Desktop: original styling preserved */}
