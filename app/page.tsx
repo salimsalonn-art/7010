@@ -330,7 +330,7 @@ const [content, setContent] = useState({
           
 <div
   className="absolute inset-0 bg-no-repeat opacity-80
-    [background-size:auto_75%] [background-position:75%_center]
+    [background-size:auto_85%] [background-position:75%_center]
     sm:bg-cover sm:bg-center"
   style={{ backgroundImage: `url('/background.png')` }}
 />
@@ -416,12 +416,7 @@ const [content, setContent] = useState({
                 >
                   <span className="block">{content.headingLine1}</span>
                   <span className="block">{content.headingLine2}</span>
-                 <span
-  className="block text-[#C7AA70] italic"
-  style={{ fontSize: `${mobileHeadingFontSize + 2}px` }}
->
-  {content.headingItalic}
-</span>
+                  <span className="block text-[#C7AA70] italic">{content.headingItalic}</span>
                 </span>
 
                 {/* Desktop: original styling preserved */}
