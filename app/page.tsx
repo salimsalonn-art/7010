@@ -348,26 +348,23 @@ const [content, setContent] = useState({
         <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col flex-1 pt-0 sm:pt-12 sm:flex-none">
 
           {/* TAG + GOLD LINE */}
-          <div className="flex items-center gap-6 mb-8 sm:mb-10 shrink-0">
-
-            {isEditing ? (
-              <input
-                type="text"
-                value={content.badge}
-                onChange={(e) =>
-                  setContent({ ...content, badge: e.target.value })
-                }
-                className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
-              />
-            ) : (
-              <span className="text-[#C7AA70] text-[9px] sm:text-sm font-semibold uppercase tracking-[0.08em] sm:tracking-[0.2em] whitespace-nowrap">
-                {content.badge}className="font-serif font-normal text-[#F5F2E9] my-auto sm:my-0 mb-6 sm:mb-8 -translate-y-3 sm:translate-y-0 tracking-tight max-w-4xl"
-              </span>
-            )}
-
-             
-
-          </div>
+       
+<div className="flex items-center gap-6 mb-8 sm:mb-10 shrink-0">
+  {isEditing ? (
+    <input
+      type="text"
+      value={content.badge}
+      onChange={(e) =>
+        setContent({ ...content, badge: e.target.value })
+      }
+      className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
+    />
+  ) : (
+    <span className="text-[#C7AA70] text-[9px] sm:text-sm font-semibold uppercase tracking-[0.08em] sm:tracking-[0.2em] whitespace-nowrap">
+      {content.badge}
+    </span>
+  )}
+</div>
 
           {/* HEADING */}
           <h1
