@@ -17,7 +17,7 @@ export default function Home() {
 
   // Editable Hero Content State
   const [content, setContent] = useState({
-    badge: "THE 7010 APPROACH",
+    badge: "WHERE GEOPOLITICS, BUSINESS, AND COMMUNICATIONS CONVERGE.
     headingLine1: "Navigating Complexity.",
     headingLine2: "Shaping Conversations.",
     headingItalic: "Advancing Interests.",
@@ -359,7 +359,7 @@ export default function Home() {
               </span>
             )}
 
-            <div className="h-[2px] bg-[#C7AA70] w-20 sm:w-40 lg:w-60" />
+             
 
           </div>
 
@@ -426,21 +426,7 @@ export default function Home() {
 
           </h1>
 
-          {/* DESCRIPTION PARAGRAPH */}
-          {isEditing ? (
-            <textarea
-              rows={4}
-              value={content.description}
-              onChange={(e) =>
-                setContent({ ...content, description: e.target.value })
-              }
-              className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9]/90 text-sm sm:text-lg p-3 w-full max-w-2xl rounded-sm mb-8 block"
-            />
-          ) : (
-            <p className="text-[#F5F2E9]/90 text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-2xl font-light">
-              {content.description}
-            </p>
-          )}
+       
 
           {/* SERVICES BUTTON */}
           <div>
