@@ -366,9 +366,9 @@ const [content, setContent] = useState({
 </div>
 
           {/* HEADING */}
-          <h1
+<h1
   ref={headingRef}
-  className="font-serif font-normal text-[#F5F2E9] my-auto sm:my-0 mb-6 sm:mb-8 -translate-y-3 sm:translate-y-0 tracking-tight max-w-4xl"
+  className="font-serif font-normal text-[#F5F2E9] mt-auto mb-0 sm:my-0 sm:mb-8 tracking-tight max-w-4xl"
 >
 
             {isEditing ? (
@@ -434,7 +434,7 @@ const [content, setContent] = useState({
        
 
           {/* SERVICES BUTTON */}
-         <div className="mt-auto pt-2 pb-6 sm:mt-0 sm:pt-0 sm:pb-0">
+         <div className="mt-7 mb-auto pt-0 pb-8 sm:mt-0 sm:mb-0 sm:pt-0 sm:pb-0">
   <a
     href="/services"
               className="inline-flex items-center space-x-3 px-6 py-3.5 bg-transparent border border-[#C7AA70] text-[#F5F2E9] hover:bg-[#C7AA70] hover:text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 rounded-sm shadow-lg"
