@@ -7,6 +7,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contentLoading, setContentLoading] = useState(true);
 
   // Authentication & Edit State
   const [isEditing, setIsEditing] = useState(false);
@@ -77,6 +78,7 @@ const [content, setContent] = useState({
     return () => resizeObserver.disconnect();
   }, [content.headingLine1, content.headingLine2, content.headingItalic]);
 
+
   // Load Saved Content from Firebase Firestore on mount
   useEffect(() => {
     const fetchContent = async () => {
@@ -85,18 +87,21 @@ const [content, setContent] = useState({
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setContent({
-            ...content,
-            ...docSnap.data()
-          } as typeof content);
+          setContent((prevContent) => ({
+            ...prevContent,
+            ...docSnap.data(),
+          }));
         }
       } catch (err) {
-        console.error("Error fetching home page content:", err);
+        console.error('Error fetching home page content:', err);
+      } finally {
+        setContentLoading(false);
       }
     };
 
     fetchContent();
   }, []);
+
 
   // Handle Login Authentication
   const handleLogin = (e: React.FormEvent) => {
@@ -124,9 +129,12 @@ const [content, setContent] = useState({
     }
   };
 
-  return (
-    <main className="min-h-screen font-sans antialiased selection:bg-[#C7AA70] selection:text-black bg-[#0A1128] text-white relative">
-
+ return (
+  <>
+    {contentLoading ? (
+      <main className="min-h-screen bg-[#0A1128]" />
+    ) : (
+      <main className="min-h-screen font-sans antialiased selection:bg-[#C7AA70] selection:text-black bg-[#0A1128] text-white relative">
       {/* DISCREET EDIT TOGGLE (Bottom Right) */}
       <div className="fixed bottom-4 right-4 z-50">
         {!isEditing ? (
@@ -483,6 +491,8 @@ const [content, setContent] = useState({
         </div>
       </footer>
 
-    </main>
+      </main>
+    )}
+  </>
   );
 }

@@ -7,6 +7,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function AboutPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contentLoading, setContentLoading] = useState(true);
 
   // Authentication & Edit State
   const [isEditing, setIsEditing] = useState(false);
@@ -24,6 +25,7 @@ export default function AboutPage() {
       '7010 Advisory is an independent communications and advisory firm working with organizations operating across the United States and international markets. Combining deep media experience, geopolitical insight, and an understanding of the intersection between business and policy, the firm helps clients anticipate challenges, communicate effectively, and pursue new opportunities.'
   });
 
+
   // Load Saved Content from Firebase
   useEffect(() => {
     const fetchContent = async () => {
@@ -32,18 +34,21 @@ export default function AboutPage() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setContent({
-            ...content,
-            ...docSnap.data()
-          });
+          setContent((prevContent) => ({
+            ...prevContent,
+            ...docSnap.data(),
+          }));
         }
       } catch (err) {
         console.error('Error fetching about page content:', err);
+      } finally {
+        setContentLoading(false);
       }
     };
 
     fetchContent();
   }, []);
+
 
   // Login Authentication
   const handleLogin = (e: React.FormEvent) => {
@@ -71,8 +76,12 @@ export default function AboutPage() {
     }
   };
 
-  return (
-    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative">
+return (
+  <>
+    {contentLoading ? (
+      <main className="min-h-screen bg-[#0A1128]" />
+    ) : (
+      <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative">
 
       {/* DISCREET EDIT MODE */}
       <div className="fixed bottom-4 right-4 z-50">
@@ -412,6 +421,8 @@ export default function AboutPage() {
 
       </section>
 
-    </main>
+      </main>
+    )}
+  </>
   );
 }

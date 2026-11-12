@@ -8,6 +8,7 @@ export default function ContactPage() {
   const [selectedService, setSelectedService] = useState('General Inquiry');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contentLoading, setContentLoading] = useState(true);
 
   // Authentication & Edit State
   const [isEditing, setIsEditing] = useState(false);
@@ -22,21 +23,30 @@ export default function ContactPage() {
     description: "Whether you're navigating complex challenges, evaluating new opportunities, or seeking independent strategic counsel, we welcome the opportunity to connect."
   });
 
+
   // Load Saved Content from Firebase Firestore on mount
   useEffect(() => {
     const fetchContent = async () => {
       try {
         const docRef = doc(db, 'site_content', 'contact_page');
         const docSnap = await getDoc(docRef);
+
         if (docSnap.exists()) {
-          setContent(docSnap.data() as typeof content);
+          setContent((prevContent) => ({
+            ...prevContent,
+            ...docSnap.data(),
+          }));
         }
       } catch (err) {
-        console.error("Error fetching contact page content:", err);
+        console.error('Error fetching contact page content:', err);
+      } finally {
+        setContentLoading(false);
       }
     };
+
     fetchContent();
   }, []);
+
 
   // Handle Login Authentication
   const handleLogin = (e: React.FormEvent) => {
@@ -71,9 +81,12 @@ export default function ContactPage() {
   "Crisis Communications & Reputation Management"
 ];
 
-  return (
-    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden flex flex-col justify-between">
-      
+ return (
+  <>
+    {contentLoading ? (
+      <main className="min-h-screen bg-[#0A1128]" />
+    ) : (
+      <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden flex flex-col justify-between">
       {/* DISCREET EDIT TOGGLE (Bottom Right) */}
       <div className="fixed bottom-4 right-4 z-50">
         {!isEditing ? (
@@ -360,6 +373,8 @@ export default function ContactPage() {
           <div className="text-slate-500 text-[11px]">© 2026 7010 Advisory. All rights reserved.</div>
         </div>
       </footer>
-    </main>
+      </main>
+    )}
+  </>
   );
 }

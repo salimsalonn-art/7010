@@ -54,9 +54,11 @@ export default function ServicesPage() {
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState('');
 
-  // Editable Page Content
-  const [headerContent, setHeaderContent] = useState(DEFAULT_HEADER);
-  const [servicesList, setServicesList] = useState(DEFAULT_SERVICES);
+// Editable Page Content
+const [headerContent, setHeaderContent] = useState(DEFAULT_HEADER);
+const [servicesList, setServicesList] = useState(DEFAULT_SERVICES);
+const [contentLoading, setContentLoading] = useState(true);
+
 
   // Load saved page content from Firestore
   useEffect(() => {
@@ -88,8 +90,10 @@ export default function ServicesPage() {
             setServicesList(merged);
           }
         }
-      } catch (err) {
+          } catch (err) {
         console.error("Error fetching services page content:", err);
+      } finally {
+        setContentLoading(false);
       }
     };
 
@@ -223,7 +227,11 @@ const renderIcon = (iconType: string) => {
 
 
   return (
-    <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden">
+  <>
+    {contentLoading ? (
+      <main className="min-h-screen bg-[#0A1128]" />
+    ) : (
+      <main className="min-h-screen font-sans antialiased bg-[#0A1128] text-white relative overflow-hidden">
 
       {/* DISCREET EDIT TOGGLE */}
       <div className="fixed bottom-4 right-4 z-50">
@@ -514,6 +522,8 @@ const renderIcon = (iconType: string) => {
           </a>
         </div>
       </section>
-    </main>
-  );
+      </main>
+    )}
+  </>
+);
 }
