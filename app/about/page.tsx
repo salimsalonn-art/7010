@@ -342,13 +342,7 @@ export default function AboutPage() {
           </div>
 
           {/* HEADING */}
-          <h1
-  className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl"
-  style={{
-    WebkitTextStroke: '0.6px #000000',
-    paintOrder: 'stroke fill',
-  }}
->
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl">
 
             {isEditing ? (
               <div className="space-y-3">
@@ -397,9 +391,15 @@ export default function AboutPage() {
               className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] text-sm sm:text-lg p-3 w-full max-w-3xl rounded-sm"
             />
           ) : (
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
-              {content.description}
-            </p>
+           <p
+  className="text-slate-300 text-sm sm:text-base leading-relaxed font-semibold max-w-2xl"
+  style={{
+    WebkitTextStroke: '0.3px #000000',
+    paintOrder: 'stroke fill',
+  }}
+>
+  {content.description}
+</p>
           )}
 
         </div>
