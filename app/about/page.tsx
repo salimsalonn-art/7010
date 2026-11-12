@@ -300,7 +300,7 @@ export default function AboutPage() {
     sm:bg-cover bg-center"
     style={{
       backgroundImage: "url('/right.png')",
-      backgroundPosition: 'center center',
+      
     }}
   />
 
