@@ -361,7 +361,7 @@ const [content, setContent] = useState({
               />
             ) : (
               <span className="text-[#C7AA70] text-[9px] sm:text-sm font-semibold uppercase tracking-[0.08em] sm:tracking-[0.2em] whitespace-nowrap">
-                {content.badge}
+                {content.badge}className="font-serif font-normal text-[#F5F2E9] my-auto sm:my-0 mb-6 sm:mb-8 -translate-y-3 sm:translate-y-0 tracking-tight max-w-4xl"
               </span>
             )}
 
@@ -372,7 +372,7 @@ const [content, setContent] = useState({
           {/* HEADING */}
           <h1
   ref={headingRef}
-  className="font-serif font-normal text-[#F5F2E9] my-auto sm:my-0 mb-6 sm:mb-8 tracking-tight max-w-4xl"
+  className="font-serif font-normal text-[#F5F2E9] my-auto sm:my-0 mb-6 sm:mb-8 -translate-y-3 sm:translate-y-0 tracking-tight max-w-4xl"
 >
 
             {isEditing ? (
@@ -438,7 +438,7 @@ const [content, setContent] = useState({
        
 
           {/* SERVICES BUTTON */}
-         <div className="mt-auto pt-6 sm:mt-0 sm:pt-0">
+         <div className="mt-auto pt-2 pb-6 sm:mt-0 sm:pt-0 sm:pb-0">
   <a
     href="/services"
               className="inline-flex items-center space-x-3 px-6 py-3.5 bg-transparent border border-[#C7AA70] text-[#F5F2E9] hover:bg-[#C7AA70] hover:text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 rounded-sm shadow-lg"
