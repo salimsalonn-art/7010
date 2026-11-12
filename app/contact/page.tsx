@@ -236,9 +236,15 @@ export default function ContactPage() {
               className="bg-[#121F42] border border-[#C7AA70] text-slate-300 text-xs sm:text-sm p-3 w-full max-w-xl mx-auto block rounded-sm text-center"
             />
           ) : (
-            <p className="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed">
-              {content.description}
-            </p>
+           <p
+  className="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-bold leading-relaxed"
+  style={{
+    WebkitTextStroke: '0.4px #000000',
+    paintOrder: 'stroke fill',
+  }}
+>
+  {content.description}
+</p>
           )}
         </div>
 
