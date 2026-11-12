@@ -294,16 +294,19 @@ export default function AboutPage() {
         {/* BACKGROUND IMAGE */}
 <div className="absolute inset-0 z-0">
 
-  <div
-    className="absolute inset-0 bg-no-repeat
-    bg-[length:100%_100%]
-    bg-[position:60%_center]
-    sm:bg-cover bg-center"
-    style={{
-      backgroundImage: "url('/right.png')",
-      
-    }}
-  />
+ {/* MOBILE BACKGROUND */}
+<div
+  className="absolute inset-0 bg-no-repeat
+    bg-[length:100%_100%] bg-[position:60%_center]
+    sm:hidden"
+  style={{ backgroundImage: "url('/right2.png')" }}
+/>
+
+{/* DESKTOP BACKGROUND */}
+<div
+  className="absolute inset-0 hidden bg-cover bg-center sm:block"
+  style={{ backgroundImage: "url('/right.png')" }}
+/>
 
   {/* DARK LEFT GRADIENT */}
   <div className="absolute inset-0 bg-gradient-to-r from-[#061426] via-[#061426]/95 sm:via-[#061426]/85 to-[#061426]/10" />
