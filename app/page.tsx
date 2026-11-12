@@ -422,7 +422,7 @@ const [content, setContent] = useState({
                   }}
                 >
                   <span
-  className="block"
+  className="block font-bold -translate-y-1 relative"
   style={{
     WebkitTextStroke: '0.6px #000000',
     paintOrder: 'stroke fill',
