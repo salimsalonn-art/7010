@@ -449,7 +449,7 @@ const [content, setContent] = useState({
        
 
           {/* SERVICES BUTTON */}
-         <div className="mt-7 mb-auto pt-0 pb-8 sm:mt-0 sm:mb-0 sm:pt-0 sm:pb-0">
+         <div className="mt-10 mb-auto pt-0 pb-8 sm:mt-0 sm:mb-0 sm:pt-0 sm:pb-0">
   <a
     href="/services"
               className="inline-flex items-center space-x-3 px-6 py-3.5 bg-transparent border border-[#C7AA70] text-[#F5F2E9] hover:bg-[#C7AA70] hover:text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 rounded-sm shadow-lg"
