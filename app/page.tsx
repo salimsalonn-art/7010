@@ -317,10 +317,12 @@ const [content, setContent] = useState({
       </nav>
 
       {/* HERO SECTION */}
-      <section
-        id="home"
-        className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center pt-32 pb-12 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800"
-      >
+     
+<section
+  id="home"
+  className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center pt-32 pb-12 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800"
+>
+
 
         {/* Background Image & Light Gradient Overlays */}
         <div className="absolute inset-0 z-0">
@@ -339,7 +341,7 @@ const [content, setContent] = useState({
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-12">
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-0 sm:pt-12">
 
           {/* TAG + GOLD LINE */}
           <div className="flex items-center gap-6 mb-8 sm:mb-10">

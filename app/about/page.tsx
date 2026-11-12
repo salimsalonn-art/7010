@@ -314,7 +314,7 @@ export default function AboutPage() {
 </div>
 
         {/* HERO CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="relative z-10 max-w-7xl mx-auto w-full mt-0">
 
           {/* TAG */}
           <div className="flex items-center gap-6 mb-8 sm:mb-10">
