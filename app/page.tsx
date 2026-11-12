@@ -360,7 +360,13 @@ const [content, setContent] = useState({
       className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
     />
   ) : (
-  <span className="text-[#C7AA70] text-[10px] sm:text-sm font-semibold uppercase tracking-[0.06em] sm:tracking-[0.2em] whitespace-nowrap">
+  <span
+  className="text-[#C7AA70] text-[10px] sm:text-sm font-semibold uppercase tracking-[0.06em] sm:tracking-[0.2em] whitespace-nowrap"
+  style={{
+    WebkitTextStroke: '0.3px #000000',
+    paintOrder: 'stroke fill',
+  }}
+>
   {content.badge}
 </span>
   )}
@@ -414,7 +420,15 @@ const [content, setContent] = useState({
                     overflowWrap: 'anywhere',
                   }}
                 >
-                  <span className="block">{content.headingLine1}</span>
+                  <span
+  className="block"
+  style={{
+    WebkitTextStroke: '0.6px #000000',
+    paintOrder: 'stroke fill',
+  }}
+>
+  {content.headingLine1}
+</span>
                   <span className="block">{content.headingLine2}</span>
                   <span className="block text-[#C7AA70] italic">{content.headingItalic}</span>
                 </span>
