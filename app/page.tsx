@@ -413,14 +413,14 @@ const [content, setContent] = useState({
             ) : (
               <>
                 {/* Mobile: each Firebase line is measured and fitted to the available width */}
-                <span
-                  className="block sm:hidden leading-[1.2] break-words"
-                  style={{
-                    fontSize: `${mobileHeadingFontSize}px`,
-                    transition: 'font-size 0.2s ease',
-                    overflowWrap: 'anywhere',
-                  }}
-                >
+               <span
+  className="block sm:hidden leading-[1.2] break-words font-bold relative -translate-y-1"
+  style={{
+    fontSize: `${mobileHeadingFontSize}px`,
+    transition: 'font-size 0.2s ease',
+    overflowWrap: 'anywhere',
+  }}
+>
                   <span
   className="block font-bold -translate-y-1 relative"
   style={{
