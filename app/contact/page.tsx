@@ -200,10 +200,10 @@ export default function ContactPage() {
       </nav>
 
       {/* CONTACT HERO & FORM SECTION */}
-      <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-4xl mx-auto px-5 sm:px-6 w-full flex-grow">
+      <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 max-w-7xl mx-auto px-5 sm:px-6 w-full flex-grow">
         
         {/* Globe Background Asset at Top Right */}
-        <div className="absolute top-4 right-[-25px] sm:top-0 sm:right-[-5%] lg:right-[-2%] w-[280px] h-[280px] sm:w-[650px] sm:h-[650px] lg:w-[800px] lg:h-[800px] pointer-events-none z-0 opacity-[0.82] sm:opacity-80 overflow-hidden">
+        <div className="absolute top-4 right-[-25px] sm:top-0 sm:right-[-5%] lg:right-[-5%] w-[280px] h-[280px] sm:w-[650px] sm:h-[650px] lg:w-[750px] lg:h-[750px] pointer-events-none z-0 opacity-[0.82] sm:opacity-80 overflow-hidden">
           <img 
             src="/globe.png" 
             alt="Globe Background" 
