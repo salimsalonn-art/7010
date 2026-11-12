@@ -41,7 +41,7 @@ const DEFAULT_HEADER = {
   tag: "OUR SERVICES",
   titleLine1: "Strategic Counsel.",
   titleLine2: "Real-World Impact.",
-  subtitle: "Targeted advisory and communications support that helps organizations anticipate risk, navigate change, and advance their objectives in complex environments."
+  subtitle: "We provide tailored advisory services across strategy, geopolitical risk, business intelligence, and communications, helping organizations navigate challenges, identify opportunities, and achieve their objectives."
 };
 
 export default function ServicesPage() {

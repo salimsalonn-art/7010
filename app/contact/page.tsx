@@ -19,7 +19,7 @@ export default function ContactPage() {
   // Editable Content State
   const [content, setContent] = useState({
     title: "Get in Touch",
-    description: "Whether you're navigating a complex challenge, exploring new opportunities, or seeking independent strategic counsel, we welcome the opportunity to connect."
+    description: "Whether you're navigating complex challenges, evaluating new opportunities, or seeking independent strategic counsel, we welcome the opportunity to connect."
   });
 
   // Load Saved Content from Firebase Firestore on mount
