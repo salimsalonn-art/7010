@@ -296,7 +296,8 @@ export default function AboutPage() {
 
   <div
     className="absolute inset-0 bg-no-repeat
-    bg-[length:100%_100%]
+    bg-[length:80%_100%]
+    bg-[position:60%_center]
     sm:bg-cover bg-center"
     style={{
       backgroundImage: "url('/right.png')",
@@ -313,7 +314,7 @@ export default function AboutPage() {
 </div>
 
         {/* HERO CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-8">
+        <div className="relative z-10 max-w-7xl mx-auto w-full">
 
           {/* TAG */}
           <div className="flex items-center gap-6 mb-8 sm:mb-10">
@@ -387,7 +388,7 @@ export default function AboutPage() {
               className="bg-[#121F42] border border-[#C7AA70] text-[#F5F2E9] text-sm sm:text-lg p-3 w-full max-w-3xl rounded-sm"
             />
           ) : (
-            <p className="text-[#F5F2E9] text-sm sm:text-lg lg:text-xl leading-relaxed mb-8 max-w-3xl font-light">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
               {content.description}
             </p>
           )}
