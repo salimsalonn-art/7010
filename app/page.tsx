@@ -320,17 +320,21 @@ const [content, setContent] = useState({
      
 <section
   id="home"
-  className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-start pt-32 pb-12 sm:justify-center sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800"
+  className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-start pt-32 pb-10 sm:justify-center sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800"
 >
 
 
         {/* Background Image & Light Gradient Overlays */}
         <div className="absolute inset-0 z-0">
 
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
-            style={{ backgroundImage: `url('/background.png')` }}
-          ></div>
+          
+<div
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80
+    [background-size:auto_100%] 
+    sm:bg-cover"
+  style={{ backgroundImage: `url('/background.png')` }}
+></div>
+
 
           {/* Lighter navy overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A1128]/60 via-[#0A1128]/35 to-[#0A1128]/20"></div>
@@ -341,10 +345,10 @@ const [content, setContent] = useState({
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-0 sm:pt-12">
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col flex-1 pt-0 sm:pt-12 sm:flex-none">
 
           {/* TAG + GOLD LINE */}
-          <div className="flex items-center gap-6 mb-8 sm:mb-10">
+          <div className="flex items-center gap-6 mb-8 sm:mb-10 shrink-0">
 
             {isEditing ? (
               <input
@@ -366,7 +370,10 @@ const [content, setContent] = useState({
           </div>
 
           {/* HEADING */}
-          <h1 ref={headingRef} className="font-serif font-normal text-[#F5F2E9] mb-6 sm:mb-8 tracking-tight max-w-4xl">
+          <h1
+  ref={headingRef}
+  className="font-serif font-normal text-[#F5F2E9] my-auto sm:my-0 mb-6 sm:mb-8 tracking-tight max-w-4xl"
+>
 
             {isEditing ? (
               <div className="space-y-2">
@@ -431,9 +438,9 @@ const [content, setContent] = useState({
        
 
           {/* SERVICES BUTTON */}
-          <div>
-            <a
-              href="/services"
+         <div className="mt-auto pt-6 sm:mt-0 sm:pt-0">
+  <a
+    href="/services"
               className="inline-flex items-center space-x-3 px-6 py-3.5 bg-transparent border border-[#C7AA70] text-[#F5F2E9] hover:bg-[#C7AA70] hover:text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 rounded-sm shadow-lg"
             >
               <span>Our Services</span>
