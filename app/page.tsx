@@ -354,7 +354,7 @@ const [content, setContent] = useState({
                 className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
               />
             ) : (
-              <span className="text-[#C7AA70] text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] whitespace-nowrap">
+              <span className="text-[#C7AA70] text-[9px] sm:text-sm font-semibold uppercase tracking-[0.08em] sm:tracking-[0.2em] whitespace-nowrap">
                 {content.badge}
               </span>
             )}
