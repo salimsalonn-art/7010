@@ -342,7 +342,13 @@ export default function AboutPage() {
           </div>
 
           {/* HEADING */}
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl">
+          <h1
+  className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl"
+  style={{
+    WebkitTextStroke: '0.6px #000000',
+    paintOrder: 'stroke fill',
+  }}
+>
 
             {isEditing ? (
               <div className="space-y-3">
