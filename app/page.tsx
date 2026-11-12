@@ -21,7 +21,7 @@ const [content, setContent] = useState({
   badge: "WHERE GEOPOLITICS, BUSINESS, AND COMMUNICATIONS CONVERGE",
   headingLine1: "Navigating Complexity.",
     headingLine2: "Shaping Conversations.",
-    headingItalic: "Advancing Interests.",
+    headingItalic: "Advancing interests.",
     description: "7010 Advisory is a Washington, DC-based boutique advisory firm specializing in strategic communications, geopolitical risk, and reputation management."
   });
 
