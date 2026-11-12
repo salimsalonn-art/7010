@@ -320,7 +320,7 @@ const [content, setContent] = useState({
      
 <section
   id="home"
-  className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center pt-32 pb-12 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800"
+  className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-start pt-32 pb-12 sm:justify-center sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800"
 >
 
 

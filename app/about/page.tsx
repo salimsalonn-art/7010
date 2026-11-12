@@ -289,7 +289,7 @@ export default function AboutPage() {
       </nav>
 
       {/* ABOUT HERO SECTION */}
-      <section className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-center pt-32 pb-16 sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800">
+      <section className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-start pt-32 pb-16 sm:justify-center sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800">
 
         {/* BACKGROUND IMAGE */}
 <div className="absolute inset-0 z-0">
