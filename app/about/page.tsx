@@ -298,7 +298,7 @@ return (
       </nav>
 
       {/* ABOUT HERO SECTION */}
-      <section className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-start pt-32 pb-16 sm:justify-center sm:pt-40 sm:pb-20 px-5 sm:px-6 overflow-hidden border-b border-slate-800">
+      <section className="relative min-h-screen sm:min-h-screen flex flex-col justify-start pt-36 pb-24 sm:justify-center sm:pt-40 sm:pb-20 px-6 sm:px-6 overflow-hidden border-b border-slate-800">
 
         {/* BACKGROUND IMAGE */}
 <div className="absolute inset-0 z-0">
@@ -326,10 +326,10 @@ return (
 </div>
 
         {/* HERO CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full mt-0">
+        <div className="relative z-10 max-w-7xl mx-auto w-full mt-0 flex flex-col min-h-[65vh] sm:min-h-0 justify-center sm:justify-start">
 
           {/* TAG */}
-          <div className="flex items-center gap-6 mb-8 sm:mb-10">
+          <div className="flex items-center gap-6 mb-12 sm:mb-10">
 
             {isEditing ? (
               <input
@@ -352,7 +352,7 @@ return (
 
           {/* HEADING */}
           <h1
-  className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-8 max-w-5xl"
+  className="font-serif text-5xl sm:text-6xl lg:text-8xl font-normal leading-[1.1] tracking-tight text-[#F5F2E9] mb-12 max-w-5xl"
   style={{
     WebkitTextStroke: '0.6px #000000',
     paintOrder: 'stroke fill',
