@@ -365,7 +365,12 @@ export default function ContactPage() {
           <div className="flex items-center space-x-6 uppercase tracking-widest text-[11px] font-semibold text-slate-400">
             <a href="/services" className="hover:text-[#C7AA70] transition-colors">Strategic Communications</a>
             <span>|</span>
-            <a href="/services" className="hover:text-[#C7AA70] transition-colors">Geopolitical Risk Analysis</a>
+            <a
+  href="/services"
+  className="text-[9px] sm:text-[11px] tracking-[0.08em] leading-tight max-w-[130px] text-center hover:text-[#C7AA70] transition-colors"
+>
+  Geopolitical Risk Analysis
+</a>
             <span>|</span>
             <a href="/services" className="hover:text-[#C7AA70] transition-colors">Business Advisory</a>
           </div>
