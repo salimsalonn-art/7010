@@ -356,9 +356,9 @@ const [content, setContent] = useState({
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col flex-1 pt-0 sm:pt-12 sm:flex-none">
 
-          {/* TAG + GOLD LINE */}
-       
-<div className="flex items-center gap-6 mb-8 sm:mb-10 shrink-0">
+
+{/* TAG + GOLD LINE */}
+<div className="flex items-start gap-6 mb-6 sm:mb-10 shrink-0">
   {isEditing ? (
     <input
       type="text"
@@ -369,17 +369,37 @@ const [content, setContent] = useState({
       className="bg-[#121F42] border border-[#C7AA70] text-[#C7AA70] text-xs font-mono uppercase tracking-widest p-2 w-full max-w-xs rounded-sm"
     />
   ) : (
-  <span
-  className="text-[#C7AA70] text-[10px] sm:text-sm font-semibold uppercase tracking-[0.06em] sm:tracking-[0.2em] whitespace-nowrap"
-  style={{
-    WebkitTextStroke: '0.3px #000000',
-    paintOrder: 'stroke fill',
-  }}
->
-  {content.badge}
-</span>
+    <>
+      {/* MOBILE: Three-line premium tagline */}
+      <span
+        className="sm:hidden block border-l-2 border-[#C7AA70]/60 pl-3 text-[#C7AA70] text-[9px] font-semibold uppercase tracking-[0.14em] leading-[1.9]"
+      >
+        {content.badge.split(',').map((line, index, arr) => (
+          <span key={index} className="block">
+            {line.trim()}
+            {index < arr.length - 1
+              ? ','
+              : !line.trim().endsWith('.')
+                ? '.'
+                : ''}
+          </span>
+        ))}
+      </span>
+
+      {/* DESKTOP: Original styling preserved */}
+      <span
+        className="hidden sm:block text-[#C7AA70] text-sm font-semibold uppercase tracking-[0.2em] whitespace-nowrap"
+        style={{
+          WebkitTextStroke: '0.3px #000000',
+          paintOrder: 'stroke fill',
+        }}
+      >
+        {content.badge}
+      </span>
+    </>
   )}
 </div>
+
 
           {/* HEADING */}
 <h1
