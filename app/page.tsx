@@ -339,8 +339,8 @@ const [content, setContent] = useState({
 <div
   className="absolute inset-0 bg-no-repeat opacity-80
     [background-image:url('/background2.png')]
-    [background-size:115%_100%]
-    [background-position:left_center]
+    [background-size:100%_100%]
+    [background-position:75%_center]
     sm:bg-cover sm:bg-center sm:[background-image:url('/background.png')]"
 />
 
