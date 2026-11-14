@@ -28,7 +28,7 @@ const [content, setContent] = useState({
   // MOBILE HEADING: measure the actual Firebase text and fit the
   // longest line to the available mobile width. Desktop is unaffected.
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const [mobileHeadingFontSize, setMobileHeadingFontSize] = useState(34);
+  const [mobileHeadingFontSize, setMobileHeadingFontSize] = useState(30);
 
   useEffect(() => {
     const headingElement = headingRef.current;
@@ -45,7 +45,7 @@ const [content, setContent] = useState({
       const headingStyle = window.getComputedStyle(headingElement);
       const fontFamily = headingStyle.fontFamily;
       const fontWeight = headingStyle.fontWeight || '400';
-      const referenceFontSize = 34;
+      const referenceFontSize = 30;
 
       const lines = [
         { text: content.headingLine1 || '', italic: false },
@@ -61,7 +61,7 @@ const [content, setContent] = useState({
       });
 
       if (!widestLine) {
-        setMobileHeadingFontSize(34);
+        setMobileHeadingFontSize(30);
         return;
       }
 
@@ -339,8 +339,8 @@ const [content, setContent] = useState({
 <div
   className="absolute inset-0 bg-no-repeat opacity-80
     [background-image:url('/background2.png')]
-    [background-size:100%_100%]
-    [background-position:75%_center]
+    [background-size:115%_100%]
+    [background-position:left_center]
     sm:bg-cover sm:bg-center sm:[background-image:url('/background.png')]"
 />
 
