@@ -372,7 +372,7 @@ const [content, setContent] = useState({
     <>
       {/* MOBILE: Three-line premium tagline */}
       <span
-        className="sm:hidden block border-l-2 border-[#C7AA70]/60 pl-3 text-[#C7AA70] text-[9px] font-semibold uppercase tracking-[0.14em] leading-[1.9]"
+        className="sm:hidden block border-l-2 border-[#C7AA70]/60 pl-3 text-[#C7AA70] text-[11px] font-semibold uppercase tracking-[0.14em] leading-[1.9]"
       >
         {content.badge.split(',').map((line, index, arr) => (
           <span key={index} className="block">
